@@ -125,18 +125,3 @@ void print_matrix(int ** arr, int size)
         printf("\n");
     }
 }
-
-int main(void)
-{
-    int size;
-    printf("Enter size of the magic tree: ");
-    scanf("%d",&size);
-
-    int x,y;
-    printf("Enter the begining position of element 1 {x,y}: ");
-    scanf("%d %d", &x, &y);
-    
-    make_magic_square(size, x, y);
-
-    return 0;
-}
