@@ -195,6 +195,23 @@ class cube{
     }
 };
 
+bool check_linearity(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3)
+{
+    double x = x2-x1;
+    double y = y2-y1;
+    double z = z2-z1;
+    
+    double x_ = x3-x1;
+    double y_ = y3-y1;
+    double z_ = z3-z1;
+
+    if(x*y_== y*x_&&z*x_==x*z_)
+    {
+        return true;
+    }
+    return false;
+}
+
 int main(void)
 {
     square magic_1(3);
@@ -211,6 +228,8 @@ int main(void)
     cube myCube(3);
     myCube.make_magic_cube(0,1,1);
     myCube.print_cube();
+
+    // cout<<check_linearity(1,11,121,0,4,0,1,5,0);
 
     return 0;
 }
