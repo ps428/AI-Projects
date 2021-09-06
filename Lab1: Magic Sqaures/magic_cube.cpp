@@ -47,30 +47,6 @@ class square
         }
     }
 
-// A function which will be used to print the current game status
-    void print_game_square()
-    {
-        for(int i=0; i<size; i++)
-        {
-            for(int j=0; j<size; j++)
-            {
-                if(square_matrix[i][j]==-1)
-                {
-                    cout<<'_ ';
-                }
-                else if(square_matrix[i][j]==1)
-                {
-                    cout<<"X";
-                }
-                else if(square_matrix[i][j] == 0)
-                {
-                    cout<<"O";
-                }
-            }
-            printf("\n");
-        }
-    }
-
     void add_basic_values(int n)
     {
         for(int i=0; i<size; i++)
@@ -246,20 +222,6 @@ bool check_linearity(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int
         return true;
     }
     return false;
-}
-
-magicCube* initiate_game()
-{
-    cout<<"Welcome to 3d Tic Tak Toe:\n";
-    cout<<"Enter the three coordinates for your move: ";
-    
-    int u_i,u_j,u_k;
-    cin>>u_i>>u_j>>u_k;
-
-    magicCube* game = (magicCube*)malloc(sizeof(magicCube));
-    magicCube current(3);
-    current.make_magic_cube(0,1,1);
-
 }
 
 int main(void)
