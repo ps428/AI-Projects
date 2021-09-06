@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<map>
 #include"cpp_magic_square.h"
 
 using namespace std;
@@ -73,10 +74,12 @@ class magicCube{
     square magic_square_2;
     square magic_square_3;
 
-    // Square for the game now
-    square user_square_1;
-    square user_square_2;
-    square user_square_3;
+    // Assuming that we have a perfect magical cube,
+    // Map such that Map:- Numerical Value:->{x,y,z, Chance_value(X,O,_)}
+    // Definition of Chance Value:  -1 => _
+    //                               1 => X
+    //                               2 => O
+    map<int,vector<int>> game_status;
 
     // Values of first element
     square *current_square = (square*)malloc(sizeof(square)); // Will govern z
@@ -129,6 +132,7 @@ class magicCube{
         for(int i=0; i<size*size*size; i++)
         {
             current_square->square_matrix[curr_x][curr_y] = i+1;
+            game_status[i+1] = {curr_x, curr_y, curr_z, -1}; // AS -1 meaning blank(_)
             // cout<<curr_x<<", "<<curr_y<<", "<<curr_z<<"--"<<endl;
 
             curr_x--;
@@ -192,7 +196,11 @@ class magicCube{
     
     void start_game()
     {
-
+        cout<<"Value:  x, y, z, \tChance\n";
+        for(auto it = game_status.cbegin(); it!=game_status.cend(); ++it)
+        {
+            cout<<it->first<<": \t"<<it->second[0]<<", "<<it->second[1]<<", "<<it->second[2]<<", \t"<<it->second[3]<<endl;
+        }
     }
 
     void print_cube()
@@ -238,9 +246,12 @@ int main(void)
     // magic_1.next->print_square();
 
     magicCube myCube(3);
-    myCube.make_magic_cube(0,1,1);
+    int x,y,z;
+    cout<<"Enter co-ordinates (x,y,z) of first element: ";
+    cin>>x>>y>>z;
+    myCube.make_magic_cube(x,y,z);
     myCube.print_cube();
-
+    myCube.start_game();
     // cout<<check_linearity(1,11,121,0,4,0,1,5,0);
 
     return 0;
