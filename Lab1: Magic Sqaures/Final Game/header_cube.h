@@ -142,6 +142,51 @@ class magicCube{
         }
     }
 
+    map<int,vector<int>>* get_game_status()
+    {
+        return &game_status;
+    }
+
+    void make_cube_using_map(map<int,vector<int>> game_status_passed)
+    {
+        for(auto it = game_status_passed.cbegin(); it!= game_status_passed.cend(); it++)
+        {
+            int x = it->second[0];
+            int y = it->second[1];
+            int z = it->second[2];
+            char value;
+
+            if(it->second[3]==-1)
+            {
+                value = '_';
+            }
+            else if(it->second[3]==1)
+            {
+                value = 'O';
+            }
+            else
+            {
+                value = 'X';
+            }
+
+            if(z==0)
+            {
+                current_square = &magic_square_1;
+            }
+            else if(z==1)
+            {
+                current_square = &magic_square_2;
+            }
+            else
+            {
+                current_square = &magic_square_3;
+            }
+            
+            current_square->game_matrix[x][y] = value;
+
+        }
+    }
+
     void print_cube()
     {
         cout<<endl<<"Square 1 is: "<<endl;
@@ -150,6 +195,17 @@ class magicCube{
         magic_square_2.print_square();
         cout<<endl<<"Square 3 is: "<<endl;
         magic_square_3.print_square();
+        cout<<endl;
+    }
+
+    void print_game_cube()
+    {
+        cout<<endl<<"Square 1 is: "<<endl;
+        magic_square_1.print_game_matrix();
+        cout<<endl<<"Square 2 is: "<<endl;
+        magic_square_2.print_game_matrix();
+        cout<<endl<<"Square 3 is: "<<endl;
+        magic_square_3.print_game_matrix();
         cout<<endl;
     }
 };

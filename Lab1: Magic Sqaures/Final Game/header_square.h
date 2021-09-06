@@ -8,6 +8,7 @@ class square
     public:
     int size;
     int ** square_matrix;
+    char ** game_matrix;
     square * next = (square*)malloc(sizeof(square));
 
     square()
@@ -22,16 +23,26 @@ class square
         square_matrix = (int **)malloc(sizeof(int*)*size);
         
         for (int i=0; i<size; i++)
-         square_matrix[i] = (int *)malloc(size * sizeof(int));
+            square_matrix[i] = (int *)malloc(size * sizeof(int));
+
+        game_matrix = (char **)malloc(sizeof(char*)*size);
+        
+        for (int i=0; i<size; i++)
+            game_matrix[i] = (char *)malloc(size * sizeof(char)); 
     }
 
-    void initiate_square(int s)
+    void initiate_square(int s) // Looks redundant but useful when a square is initiated with unknown size..so important
     {
         size = s;
         square_matrix = (int **)malloc(sizeof(int*)*size);
         
         for (int i=0; i<size; i++)
-         square_matrix[i] = (int *)malloc(size * sizeof(int));
+            square_matrix[i] = (int *)malloc(size * sizeof(int));
+
+        game_matrix = (char **)malloc(sizeof(char*)*size);
+        
+        for (int i=0; i<size; i++)
+            game_matrix[i] = (char *)malloc(size * sizeof(char)); 
     }
 
     void print_square()
@@ -40,7 +51,20 @@ class square
         {
             for(int j=0; j<size; j++)
             {
-                printf("%d, ",square_matrix[i][j]);
+                cout<<square_matrix[i][j]<<" ";
+                // printf("%d, ",square_matrix[i][j]);
+            }
+            printf("\n");
+        }
+    }
+    void print_game_matrix()
+    {
+        for(int i=0; i<size; i++)
+        {
+            for(int j=0; j<size; j++)
+            {
+                cout<<game_matrix[i][j]<<" ";
+                // printf("%d, ",square_matrix[i][j]);
             }
             printf("\n");
         }
