@@ -82,6 +82,13 @@ void make_magic_square(int size, int x, int y)
                 iteration=1;
             }
 
+            // Special condition added
+            if(curr_x==-1&& curr_y==size)
+            {
+                curr_x = 0;
+                curr_y = size-2;
+            }
+
             // To restart loop from 0 if we reach ends
             if(curr_x==size)
             {

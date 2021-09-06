@@ -47,6 +47,30 @@ class square
         }
     }
 
+// A function which will be used to print the current game status
+    void print_game_square()
+    {
+        for(int i=0; i<size; i++)
+        {
+            for(int j=0; j<size; j++)
+            {
+                if(square_matrix[i][j]==-1)
+                {
+                    cout<<'_ ';
+                }
+                else if(square_matrix[i][j]==1)
+                {
+                    cout<<"X";
+                }
+                else if(square_matrix[i][j] == 0)
+                {
+                    cout<<"O";
+                }
+            }
+            printf("\n");
+        }
+    }
+
     void add_basic_values(int n)
     {
         for(int i=0; i<size; i++)
@@ -65,19 +89,26 @@ class square
 
 };
 
-class cube{
+class magicCube{
     public:
     int size;
+    // Squares having the values from any magic square
     square magic_square_1;
     square magic_square_2;
     square magic_square_3;
+
+    // Square for the game now
+    square user_square_1;
+    square user_square_2;
+    square user_square_3;
 
     // Values of first element
     square *current_square = (square*)malloc(sizeof(square)); // Will govern z
     int curr_x; // Will govern x
     int curr_y; // Will govern y
     int curr_z;
-    cube(int s)
+
+    magicCube(int s)
     {
         size = s;
         magic_square_1.initiate_square(size);
@@ -171,16 +202,21 @@ class cube{
                     curr_x = tmp_x;
                     curr_y = tmp_y;
                     
+                    // One step below in last entry
                     curr_y++;
                     if(curr_y==size)
                         curr_y = 0; 
                     curr_x--;
                     if(curr_x==-1)
                         curr_x = size-1;
-                    // One step below in last entry
                 }
             }
         }
+    }
+    
+    void start_game()
+    {
+
     }
 
     void print_cube()
@@ -212,6 +248,20 @@ bool check_linearity(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int
     return false;
 }
 
+magicCube* initiate_game()
+{
+    cout<<"Welcome to 3d Tic Tak Toe:\n";
+    cout<<"Enter the three coordinates for your move: ";
+    
+    int u_i,u_j,u_k;
+    cin>>u_i>>u_j>>u_k;
+
+    magicCube* game = (magicCube*)malloc(sizeof(magicCube));
+    magicCube current(3);
+    current.make_magic_cube(0,1,1);
+
+}
+
 int main(void)
 {
     square magic_1(3);
@@ -225,7 +275,7 @@ int main(void)
     magic_1.next_sqaure(&magic_2);
     // magic_1.next->print_square();
 
-    cube myCube(3);
+    magicCube myCube(3);
     myCube.make_magic_cube(0,1,1);
     myCube.print_cube();
 
@@ -233,3 +283,12 @@ int main(void)
 
     return 0;
 }
+
+// hashmap : {number(1,2,3,4,5) } => {list: x, y, z and chance(X,O,_)}
+// check fo empty pos _ ones
+// then collinear ones ... then sum
+// 1: _ 1,1,1
+// 2: _ 2,1,1
+// 21: O 1,0,1
+// 
+// 
