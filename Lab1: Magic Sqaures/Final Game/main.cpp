@@ -42,5 +42,8 @@ int main(void)
 
     get_current_boards(game_status);
 
+    running_game(game_status);
+    get_current_boards(game_status);
+
     return 0;
 }
