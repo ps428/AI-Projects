@@ -40,10 +40,10 @@ int main(void)
     // cout<<check_linearity(1,11,121,0,4,0,1,5,0);
     map<int,vector<int>>* game_status = myCube.get_game_status();
 
-    get_current_boards(game_status);
+    get_current_boards(*game_status);
 
     running_game(game_status);
-    get_current_boards(game_status);
+    get_current_boards(*game_status);
 
     return 0;
 }
