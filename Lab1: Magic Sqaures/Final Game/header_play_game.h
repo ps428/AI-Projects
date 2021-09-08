@@ -89,8 +89,9 @@ void running_game(map<int,vector<int>>* game_status)
                 // // Can comment these
                 get_current_boards(*game_status);
                 // // print_map(*game_status);
-                print_map_machine(*game_status);
-                print_map_user(*game_status);
+                // Uncomment these
+                // print_map_machine(*game_status);
+                // print_map_user(*game_status);
             }
             else
             {
@@ -120,7 +121,7 @@ void running_game(map<int,vector<int>>* game_status)
             if(move_count%2==1) //ML Casse
             {
                 // First move, fill center
-                // TODO Error here in case 2, human first..
+                // Resolved: TO-DO Error here in case 2, human first..
                 // Reason, due to no value in machine's list, we are unable to iterate over the elements
                 // In other cases, one element was there at centre
                 // So error when human occupies the centre first
@@ -138,8 +139,8 @@ void running_game(map<int,vector<int>>* game_status)
                 // // Can comment these
                 get_current_boards(*game_status);
                 // // print_map(*game_status);
-                print_map_machine(*game_status);
-                print_map_user(*game_status);
+                // print_map_machine(*game_status);
+                // print_map_user(*game_status);
             }
             else
             {
@@ -294,7 +295,7 @@ void move_pc_ai(map<int,vector<int>>* game_status)
             // ONLY IF THE VALUE OF DIFF IS FROM 1 TO 27 ELSE THERE WOULD BE SEGMENTATION ERROR
             if(diff>=1 && diff<=27)
             {               
-                /// THIS IS VERY VERY IMPORTANT TO BE DONE AFTER CHEKCING THE VALUES OF DIFF
+                /// THIS IS VERY VERY IMPORTANT TO BE DONE AFTER CHEKCING THE VALUES OF DIFF 
                 int vacancy = (*game_status)[diff][3];// To check whether it is vacant or not
                 // printf("-----%d------\n",vacancy);
 
@@ -524,6 +525,9 @@ for(int i=0;i<machine_values.size()-2;i++)
                     
                     if(linear_or_not)
                     {
+                        printf("\n%d, %d, %d => %d\n",x1,y1,z1,a);
+                        printf("\n%d, %d, %d => %d\n",x2,y2,z2,b);
+                        printf("\n%d, %d, %d => %d\n",x3,y3,z3,c);
                         machine_score++;
                     }
                 }
