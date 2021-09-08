@@ -294,6 +294,7 @@ void move_pc_ai(map<int,vector<int>>* game_status)
             // ONLY IF THE VALUE OF DIFF IS FROM 1 TO 27 ELSE THERE WOULD BE SEGMENTATION ERROR
             if(diff>=1 && diff<=27)
             {               
+                /// THIS IS VERY VERY IMPORTANT TO BE DONE AFTER CHEKCING THE VALUES OF DIFF
                 int vacancy = (*game_status)[diff][3];// To check whether it is vacant or not
                 // printf("-----%d------\n",vacancy);
 
