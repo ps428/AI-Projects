@@ -11,6 +11,15 @@ class square
         char ** game_matrix;
         square * next = (square*)malloc(sizeof(square));
 
+        //METHODS USED
+        // square();
+        // square(int s);
+        // void initiate_square(int s);    
+        // void print_square() ;
+        // void print_game_matrix() ;
+        // void add_basic_values(int n);
+        // void next_sqaure(square * next_sq);
+
     square()
     {
         // Defualt constructor

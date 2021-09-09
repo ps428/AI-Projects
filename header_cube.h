@@ -26,6 +26,16 @@ class magicCube{
     int curr_y; // Will govern y
     int curr_z;
 
+    //METHODS USED
+    // magicCube(int s);
+    // void make_magic_cube(int x, int y, int z);
+    // void make_magic_cube();
+    // void start_game();
+    // map<int,vector<int>>* get_game_status();
+    // void make_cube_using_map(map<int,vector<int>> game_status_passed);
+    // void print_cube();
+    // void print_game_cube();
+
     magicCube(int s)
     {
         size = s;
@@ -209,3 +219,4 @@ class magicCube{
         cout<<endl;
     }
 };
+

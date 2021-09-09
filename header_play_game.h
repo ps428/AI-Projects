@@ -6,12 +6,12 @@ using namespace std;
 
 #include "header_cube.h"
 
-bool fill(vector<int> move, map<int,vector<int>>* game_status);
 void running_game(map<int,vector<int>>* game_status);
 void fill_center(map<int,vector<int>>* game_status);
+bool fill(vector<int> move, map<int,vector<int>>* game_status);
+vector<int> get_user_move();
 void get_current_boards(map<int,vector<int>> game_status);
 void move_pc_ai(map<int,vector<int>>* game_status);
-vector<int> get_user_move();
 void print_map(map<int,vector<int>> game_status);
 void print_map_user(map<int,vector<int>> game_status);
 void print_map_machine(map<int,vector<int>> game_status);
