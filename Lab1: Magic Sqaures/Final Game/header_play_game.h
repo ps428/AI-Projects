@@ -32,7 +32,10 @@ void running_game(map<int,vector<int>>* game_status)
 
     // A variable move count to keep track of moves made in the game
     int move_count = 0;
+
+    // Score: {machine_score, user_scoe}
     vector<int> score;
+
     // User first or mchine first
     int type = 1;//default case for debugging and testing
 
@@ -47,13 +50,13 @@ void running_game(map<int,vector<int>>* game_status)
     cout<<"\nHello "<<name<<" this is an AI. Nice to meet you! Would you like to play first (y->yes or n->no): ";
     cin>> play_first;
 
-    if(play_first=='n')
-    {
-        type = 1; //Machine first
-    }
     if(play_first=='y')
     {
-        type = 2;// User first
+        type = 2; //User first then machine
+    }
+    if(play_first=='n')
+    {
+        type = 1;// machine first then human
     }
     
     while(move_count<27) // Total at max 27 moves possible
@@ -69,7 +72,7 @@ void running_game(map<int,vector<int>>* game_status)
         // }    
         
         
-        // Considering only machine first
+        // Considering machine first
         if(type==1)
         {
             if(move_count%2==0) //ML Casse
@@ -84,20 +87,20 @@ void running_game(map<int,vector<int>>* game_status)
                     move_pc_ai(game_status);
                 }
 
-                printf("\nYou made a nice move, here's the board: \n");
+                cout<<"\nHey "<<name<<"! You made a move, here's the board: \n";
                 
                 // // Can comment these
                 get_current_boards(*game_status);
                 // // print_map(*game_status);
                 // Uncomment these
-                // print_map_machine(*game_status);
-                // print_map_user(*game_status);
+                print_map_machine(*game_status);
+                print_map_user(*game_status);
             }
             else
             {
                 // User input part is done for now
                 vector<int> user_move = get_user_move();
-                user_move.push_back(2); //For user
+                user_move.push_back(2); //For user..[x,y,z,2}
                 // cout<<"\n\n-<<<----"<<user_move[3]<<"-----\n\n";
                 bool filled_or_not = fill(user_move, game_status);
                 while(1)
@@ -105,7 +108,6 @@ void running_game(map<int,vector<int>>* game_status)
                     if(filled_or_not)
                         break;
 
-                    // uncomment
                     get_current_boards(*game_status);
                     cout<<"\n-------ERROR BLOCK IS ALREADY FILLED------\nPlease enter correct vacant blocks: ";
                     user_move = get_user_move();
@@ -116,9 +118,9 @@ void running_game(map<int,vector<int>>* game_status)
    
         }
         
-        if(type==2)
+        if(type==2) // Human First
         {
-            if(move_count%2==1) //ML Casse
+            if(move_count%2==1) 
             {
                 // First move, fill center
                 // Resolved: TO-DO Error here in case 2, human first..
@@ -134,13 +136,13 @@ void running_game(map<int,vector<int>>* game_status)
                     move_pc_ai(game_status);
                 }
 
-                printf("\nYou made a nice move, here's the board: \n");
+                cout<<"\nHey "<<name<<"! You made a nice move, here's the board: \n";
                 
                 // // Can comment these
                 get_current_boards(*game_status);
                 // // print_map(*game_status);
-                // print_map_machine(*game_status);
-                // print_map_user(*game_status);
+                print_map_machine(*game_status);
+                print_map_user(*game_status);
             }
             else
             {
@@ -203,9 +205,9 @@ void fill_center(map<int,vector<int>>* game_status)
     // making a default move to center if it is empty
     vector<int> move = {1,1,1,1}; // Filling center with 1 if it is vacant
     bool test = fill(move, game_status);
-    if(!test)
+    if(!test) //Error ka jugad
     {
-        move = {2,2,2,1};
+        move = {2,2,2,1}; // optimal corner if user picked center
         fill(move,game_status);
     }
 }
@@ -215,9 +217,14 @@ bool fill(vector<int> move, map<int,vector<int>>* game_status)
     bool filled_or_not = false;
     for(auto it = game_status->cbegin(); it != game_status->cend(); it++)
     {
+        // Move is the vector passed by user/machine
+        // it->second vector, present at haashmap
+        // it->first key
+
         int x = move[0];
         int y = move[1];
         int z = move[2];
+        // 25: 1 1 0 -1 => 25: 1 1 0 2
         int chance_made = move[3]; //1 for machine 2 for user
 
         //If blanka nd queries match, then add the required value
@@ -256,11 +263,12 @@ void get_current_boards(map<int,vector<int>> game_status)
 
 void move_pc_ai(map<int,vector<int>>* game_status)
 {
-    // These three linked lists will hold the keys from hashmap 
+    // These three vectors will hold the keys from hashmap 
     // based on the values filled in their postions on the boards
-    vector<int> machine_values;
+    vector<int> machine_values; // {10,21,27} // Keys only
     vector<int> user_values;
     vector<int> vacant_values;
+
     bool filled = false; // A bool to check if it is filled or not
 
     for(auto it = game_status->cbegin(); it!= game_status->cend(); it++)
@@ -283,11 +291,17 @@ void move_pc_ai(map<int,vector<int>>* game_status)
     }
     
     // kind of poss win for machine function and fill if in a winning position
+    // machine moves: 1<=42-a-b<=27
+    // 42 = a+b+c => 42-a-b = c
+    // 12 10 13 26 11
+    // Checking subtraction of each pair with 42 and if it lies in rangeO(1,27), then do something {vacancy, linearity}
     for(int i=0;i<machine_values.size()-1;i++)
     {
+        //ERROR PRONE
+        int a = machine_values[i];
+
         for(int j=i+1;j<machine_values.size();j++)
         {
-            int a = machine_values[i];
             int b = machine_values[j];
             int diff = 42-a-b;
 
@@ -333,7 +347,7 @@ void move_pc_ai(map<int,vector<int>>* game_status)
         }
     }
 
-    // Poss win kind of something for user, if user in wiing position, then block it
+    // Poss win kind of something for user, if user in winning position, then block it
     for(int i=0;i<user_values.size()-1;i++)
     {
         for(int j=i+1;j<user_values.size();j++)
@@ -433,6 +447,7 @@ vector<int> print_total_score(map<int,vector<int>> game_status)
 {
     int user_score = 0;
     int machine_score = 0;
+    
     vector<int> machine_values;
     vector<int> user_values;
     vector<int> vacant_values;
@@ -456,6 +471,8 @@ vector<int> print_total_score(map<int,vector<int>> game_status)
         }
     }
 
+    //23 21 13 8 7 
+    /// riplets comparision
     for(int i=0;i<user_values.size()-2;i++)
     {
         for(int j=i+1;j<user_values.size()-1;j++)
@@ -465,6 +482,7 @@ vector<int> print_total_score(map<int,vector<int>> game_status)
                 int a = user_values[i];
                 int b = user_values[j];
                 int c = user_values[k];
+
                 if(a+b+c==42)
                 {
                     vector<int> point1 = (game_status)[a];
@@ -525,9 +543,9 @@ for(int i=0;i<machine_values.size()-2;i++)
                     
                     if(linear_or_not)
                     {
-                        printf("\n%d, %d, %d => %d\n",x1,y1,z1,a);
-                        printf("\n%d, %d, %d => %d\n",x2,y2,z2,b);
-                        printf("\n%d, %d, %d => %d\n",x3,y3,z3,c);
+                        // printf("\n%d, %d, %d => %d\n",x1,y1,z1,a);
+                        // printf("\n%d, %d, %d => %d\n",x2,y2,z2,b);
+                        // printf("\n%d, %d, %d => %d\n",x3,y3,z3,c);
                         machine_score++;
                     }
                 }
@@ -543,6 +561,4 @@ for(int i=0;i<machine_values.size()-2;i++)
     cout<<user_score<<"\nMachine(O): "<<machine_score<<"\n";
 
     return score;
-
-
 }

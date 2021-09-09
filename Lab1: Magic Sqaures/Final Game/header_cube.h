@@ -15,9 +15,10 @@ class magicCube{
 
     // Assuming that we have a perfect magical cube,
     // Map such that Map:- Numerical Value:->{x,y,z, Chance_value(X,O,_)}
+    // e.g. 22->{0,1,1,-1}
     // Definition of Chance Value:  -1 => _
-    //                               1 => X
-    //                               2 => O
+    //                               1 => O
+    //                               2 => X
     map<int,vector<int>> game_status;
 
     // Values of first element
