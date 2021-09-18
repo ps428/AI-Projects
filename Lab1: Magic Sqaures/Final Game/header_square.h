@@ -11,6 +11,10 @@ class square
     char ** game_matrix;
     square * next = (square*)malloc(sizeof(square));
 
+    square();
+    square(int s);
+
+
     square()
     {
         // Defualt constructor

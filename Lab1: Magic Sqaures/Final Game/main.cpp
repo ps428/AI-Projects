@@ -36,6 +36,10 @@ int main(void)
     cout<<"Enter co-ordinates (x,y,z) of first element: ";
     cin>>x>>y>>z;
     myCube.make_magic_cube(x,y,z);
+    if(x==0&&y==1&&z==0)
+    {
+        the
+    }
     myCube.print_cube();
     // myCube.start_game();
     // cout<<check_linearity(1,11,121,0,4,0,1,5,0);

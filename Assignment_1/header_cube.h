@@ -80,8 +80,13 @@ class magicCube{
         
         for(int i=0; i<size*size*size; i++)
         {
+            // 2d pointer integer matrix
             current_square->square_matrix[curr_x][curr_y] = i+1; // is 1 for first iteration, allocating numbers
-            game_status[i+1] = {curr_x, curr_y, curr_z, -1}; // AS -1 meaning blank(_)  
+            
+            // Hash map for game record
+            game_status[i+1] = {curr_x, curr_y, curr_z, -1}; // AS -1 meaning blank(_)
+            
+            // for debugging
             // cout<<curr_x<<", "<<curr_y<<", "<<curr_z<<"--"<<endl;
 
             curr_x--;   // here the same process of moving north west
@@ -96,7 +101,7 @@ class magicCube{
             }
             //general case would be when northwest is vacant: case1 (eg: going 1 to 2)
             if(current_square->square_matrix[curr_x][curr_y]>0)  //bcuz intially -1, when northwest is filled :case2 (eg: going 3 to 4), 
-                {
+            {
                 // Saving current state in temporary variables to return back if case 3 is observed
                 square * tmp_square = (square*)malloc(sizeof(square));
                 tmp_square = current_square;

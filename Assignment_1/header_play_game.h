@@ -165,7 +165,7 @@ void running_game(map<int,vector<int>>* game_status)
 
         }
 
-        if(move_count>6)  //will display only after 6 moves AS SHOULD BE 3 MOVES EACH TO MAKE A LINE
+        if(move_count>=6)  //will display only after 6 moves AS SHOULD BE 3 MOVES EACH TO MAKE A LINE
         {
             score = print_total_score(*game_status);
 
