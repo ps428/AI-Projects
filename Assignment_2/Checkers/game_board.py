@@ -13,7 +13,6 @@ class game_Board:
 
         self.game_board = [] # Empty board
         
-        self.piece_active = None # No active piece selected for now
 
         self.make_board()
         

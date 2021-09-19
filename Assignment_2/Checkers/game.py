@@ -1,6 +1,7 @@
 import pygame
 import game_values
 import game_board
+import play_game
 
 WINDOW = pygame.display.set_mode((game_values.WIDTH, game_values.HEIGHT))
 pygame.display.set_caption("Checkers Game")
@@ -14,8 +15,7 @@ def get_pos_mous_event(position):
 
 def main():
     play = 1
-    board = game_board.game_Board()
-
+    game = play_game.play_Game(WINDOW)
     # Cheking basic piece movement
     # piece = board.get_piece(2,0)
     # board.move(piece, 4,4)
@@ -29,12 +29,9 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
                 row, column = get_pos_mous_event(position)
-                piece = board.get_piece(row, column)
-                # A fixed move for testing purpose
-                board.move(piece, 4, 4)
+                
             
-        board.draw_all(WINDOW)
-        pygame.display.update()
+        game.update()
 
     pygame.quit()
 
