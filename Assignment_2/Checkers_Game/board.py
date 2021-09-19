@@ -29,6 +29,7 @@ class game_Board:
                         pygame.draw.rect(window, values.LIGHT, (row*values.BLOCK_SIZE, column*values.BLOCK_SIZE, values.BLOCK_SIZE, values.BLOCK_SIZE))
                         
                     
-    
+    def get_piece(self, x, y):
+        return self.board[x][y]
 
 
