@@ -17,10 +17,10 @@ class Piece:
 
     def draw_piece(self, window):
         size = values.BLOCK_SIZE//6
-        pygame.draw.circle(window, values.BLACK, (self.x, self.y), size + values.BLOCK_SIZE//12, width=1)
-        pygame.draw.circle(window, values.BLACK, (self.x, self.y), size, width=1)
+        pygame.draw.circle(window, values.BLACK, (self.x, self.y), size + values.BLOCK_SIZE//20)
+        pygame.draw.circle(window, self.color, (self.x, self.y), size)
         if self.king:
-            pygame.draw.circle(window, values.BLACK, (self.x, self.y), size - values.BLOCK_SIZE//12, width=1)
+            pygame.draw.circle(window, values.KING, (self.x, self.y), size - values.BLOCK_SIZE//12)
 
     def move(self,x,y):
         self.row = x
