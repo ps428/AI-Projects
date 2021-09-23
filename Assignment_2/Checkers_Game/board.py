@@ -69,9 +69,12 @@ class game_Board:
 
     def make_move(self, piece, x, y):
         # make a change (swap) in the board matrix
-        tmp = self.board[piece.row][piece.column]
-        self.board[piece.row][piece.column] = self.board[x][y]
-        self.board[x][y] = tmp
+
+        self.board[piece.row][piece.column], self.board[x][y] = self.board[x][y],self.board[piece.row][piece.column]
+
+        # tmp = self.board[piece.row][piece.column]
+        # self.board[piece.row][piece.column] = self.board[x][y]
+        # self.board[x][y] = tmp
 
         # execute the move on the piece
         piece.move(x,y)
@@ -84,4 +87,12 @@ class game_Board:
             self.kings_count_light+=1
         else:
             self.kings_count_dark+=1
+        
 
+    def current_status(self, window):
+        self.draw_blocks(window)
+        for row in range(0, values.ROWS):
+            for column in range(0, values.COLUMNS):
+                piece = self.board[row][column]
+                if piece != 0:
+                    piece.draw_piece(window)
