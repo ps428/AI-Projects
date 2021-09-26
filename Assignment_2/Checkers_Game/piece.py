@@ -22,9 +22,9 @@ class Piece:
         if self.king:
             pygame.draw.circle(window, values.KING, (self.x, self.y), size - values.BLOCK_SIZE//12)
 
-    def move(self,x,y):
-        self.row = x
-        self.column = y
+    def move(self,row,column):
+        self.row = row
+        self.column = column
         self.get_position()
 
     def make_king(self):

@@ -69,13 +69,15 @@ class game_Board:
 
     def make_move(self, piece, x, y):
         # make a change (swap) in the board matrix
-
+        # change 1 board = [0,p1,0,p2,0,p3,0,p4]=>[0,p1,0,p2,0,p3,p4,0]
+        # change 2 p4(0,7) => p4(0,6)
         self.board[piece.row][piece.column], self.board[x][y] = self.board[x][y],self.board[piece.row][piece.column]
-
+        # z,b = b,z
         # tmp = self.board[piece.row][piece.column]
         # self.board[piece.row][piece.column] = self.board[x][y]
         # self.board[x][y] = tmp
 
+        # change 2 p4(0,7) => p4(0,6)
         # execute the move on the piece
         piece.move(x,y)
 
@@ -96,3 +98,98 @@ class game_Board:
                 piece = self.board[row][column]
                 if piece != 0:
                     piece.draw_piece(window)
+
+# TODO OUT OF MIND
+    def get_possible_moves(self, curr_piece, moves_possible):
+       
+        if curr_piece.king == False:
+            stance = True #Positive or negative movements allowed, True => Forward, positive movements
+            x = curr_piece.row
+            y = curr_piece.column
+            x_p = x+1
+            y_p = y+1
+            x_n = x-1
+            y_n = y-1
+
+            
+            if curr_piece.color == values.BLUE:
+                stance =True
+                # if forward elements are non zero, get possible moves
+                if(x_p<=7 and y_p<=7):
+                    if(self.board[x_p][y_p]==0):
+                        moves_possible.append([x_p,y_p])
+                    else:
+                        filled_piece = self.board[x_p, y_p]
+                        is_right = True
+                        self._move_positive(piece, moves_possible, filled_piece, is_right)  
+
+                if(x_n>=0 and y_p<=7):
+                    if(self.board[x_n][y_p]==0):
+                        moves_possible.append([x_n,y_p])
+                    else:
+                        filled_piece = self.board[x_n, y_p]
+                        is_right = False
+                        self._move_positive(piece, moves_possible, filled_piece, is_right)  
+
+            else:
+                stance = False    
+                if(x_p<=7 and y_n>=0):
+                    if(self.board[x_p][y_n]==0):
+                        moves_possible.append([x_p,y_n])
+                    else:
+                        filled_piece = self.board[x_p, y_n]
+                        is_right = True
+                        self._move_negative(piece, moves_possible, filled_piece, is_right)  
+
+                if(x_n>=0 and y_n>=0):
+                    if(self.board[x_n][y_n]==0):
+                        moves_possible.append([x_n,y_n])
+                    else:
+                        filled_piece = self.board[x_n, y_n]
+                        is_right = False
+                        self._move_negative(piece, moves_possible, filled_piece, is_right)  
+        
+        # King case
+        else: 
+            pass
+
+    # Making these private, can be accessed only by class, not open to user
+    def _move_positive(self, curr_piece, moves_possible, filled_piece, is_right):
+        if(curr_piece.color != filled_piece.color):
+            if(is_right):
+                x_conquer = filled_piece.row + 1
+                y_conquer = filled_piece.column + 1
+                if(x_conquer<=7 and y_conquer<=7):
+                    if(self.board[x_conquer][y_conquer]!=0):
+                        moves_possible.append([x_conquer,y_conquer])
+                        new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
+                        self.get_possible_moves(new_piece,moves_possible)
+           
+            else:
+                x_conquer = filled_piece.row - 1
+                y_conquer = filled_piece.column + 1
+                if(x_conquer>=0 and y_conquer<=7):
+                    if(self.board[x_conquer][y_conquer]!=0):
+                        moves_possible.append([x_conquer,y_conquer])
+                        new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
+                        self.get_possible_moves(new_piece,moves_possible)
+        
+    def _move_negative(self, curr_piece, moves_possible, filled_piece, is_right):
+        if(curr_piece.color != filled_piece.color):
+            if(is_right):
+                x_conquer = filled_piece.row + 1
+                y_conquer = filled_piece.column - 1
+                if(x_conquer<=7 and y_conquer>=0):
+                    if(self.board[x_conquer][y_conquer]!=0):
+                        moves_possible.append([x_conquer,y_conquer])
+                        new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
+                        self.get_possible_moves(new_piece,moves_possible)
+            else:
+                x_conquer = filled_piece.row - 1
+                y_conquer = filled_piece.column - 1
+                if(x_conquer>=0 and y_conquer>=0):
+                    if(self.board[x_conquer][y_conquer]!=0):
+                        moves_possible.append([x_conquer,y_conquer])
+                        new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
+                        self.get_possible_moves(new_piece,moves_possible)
+            
