@@ -18,6 +18,47 @@ class game_Board:
 
     def draw_blocks(self, window):
         window.fill(values.DARK)
+        pygame.draw.rect(window, values.OPTIONS_PANEL, (values.BLOCK_SIZE*values.ROWS, 0, values.OPTIONS_PANEL_SIZE+10, values.ROWS*values.BLOCK_SIZE +10))
+        
+        #Buttons
+        # Random Game
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = values.ROWS//3*values.BLOCK_SIZE
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        pygame.init()
+        font = pygame.font.SysFont(None, 32)
+        img1 = font.render('Random Game', True, values.BLUE)
+        window.blit(img1, (x+10,y+10))
+
+
+        # Min Max Game
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = 1.5*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('MinMax', True, values.BLUE)
+        window.blit(img1, (x+45,y+10))
+        
+        # Alpha Beta Pruning 
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = 2*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Alpha Beta', True, values.BLUE)
+        window.blit(img1, (x+25,y+10))
+
+        # Restart
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Restart Game', True, values.BLUE)
+        window.blit(img1, (x+20,y+10))
+
+        # Quit
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = 3*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Quit Game', True, values.BLUE)
+        window.blit(img1, (x+30,y+10))
+
         for row in range(values.ROWS):
             for column in range(values.COLUMNS):
                 # For even columns, fill even rows with light
@@ -29,14 +70,11 @@ class game_Board:
                     if row%2==0:
                         pygame.draw.rect(window, values.LIGHT, (row*values.BLOCK_SIZE, column*values.BLOCK_SIZE, values.BLOCK_SIZE, values.BLOCK_SIZE))
       
-        for row in range(values.ROWS):
-            for column in range(values.COLUMNS):
-                if self.board[row][column] != 0:
-                    self.board[row][column].draw_piece(window)
+        
                         
     def make_pieces(self):
         for row in range(0, values.ROWS):
-            self.board.append([])
+            self.board.append([])#[[....],[....]]
             for column in range(0, values.COLUMNS):
                 if column%2==0:
                     if row%2!=0 and row<=2:
@@ -62,8 +100,9 @@ class game_Board:
         pieces = []
         for row in self.board:
             for piece in row:
-                if piece.color == color:
-                    pieces.append(piece)
+                if piece!=0:
+                    if piece.color == color:
+                        pieces.append(piece)
         
         return pieces
 
@@ -71,6 +110,7 @@ class game_Board:
         # make a change (swap) in the board matrix
         # change 1 board = [0,p1,0,p2,0,p3,0,p4]=>[0,p1,0,p2,0,p3,p4,0]
         # change 2 p4(0,7) => p4(0,6)
+        # a,b=b,a
         self.board[piece.row][piece.column], self.board[x][y] = self.board[x][y],self.board[piece.row][piece.column]
         # z,b = b,z
         # tmp = self.board[piece.row][piece.column]
@@ -83,12 +123,12 @@ class game_Board:
 
         # Dealing with kings
         if x == 0 or x == values.ROWS-1:
-            piece.make_king()
+            piece.king = True
 
-        if piece.color == values.LIGHT:
-            self.kings_count_light+=1
-        else:
-            self.kings_count_dark+=1
+            if piece.color == values.LIGHT:
+                self.kings_count_light+=1
+            else:
+                self.kings_count_dark+=1
         
 
     def current_status(self, window):
@@ -160,7 +200,7 @@ class game_Board:
                 x_conquer = filled_piece.row + 1
                 y_conquer = filled_piece.column + 1
                 if(x_conquer<=7 and y_conquer<=7):
-                    if(self.board[x_conquer][y_conquer]!=0):
+                    if(self.board[x_conquer][y_conquer]==0):
                         moves_possible.append([x_conquer,y_conquer])
                         new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
                         self.get_possible_moves(new_piece,moves_possible)
@@ -169,7 +209,7 @@ class game_Board:
                 x_conquer = filled_piece.row - 1
                 y_conquer = filled_piece.column + 1
                 if(x_conquer>=0 and y_conquer<=7):
-                    if(self.board[x_conquer][y_conquer]!=0):
+                    if(self.board[x_conquer][y_conquer]==0):
                         moves_possible.append([x_conquer,y_conquer])
                         new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
                         self.get_possible_moves(new_piece,moves_possible)
@@ -180,7 +220,7 @@ class game_Board:
                 x_conquer = filled_piece.row + 1
                 y_conquer = filled_piece.column - 1
                 if(x_conquer<=7 and y_conquer>=0):
-                    if(self.board[x_conquer][y_conquer]!=0):
+                    if(self.board[x_conquer][y_conquer]==0):
                         moves_possible.append([x_conquer,y_conquer])
                         new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
                         self.get_possible_moves(new_piece,moves_possible)
@@ -188,7 +228,7 @@ class game_Board:
                 x_conquer = filled_piece.row - 1
                 y_conquer = filled_piece.column - 1
                 if(x_conquer>=0 and y_conquer>=0):
-                    if(self.board[x_conquer][y_conquer]!=0):
+                    if(self.board[x_conquer][y_conquer]==0):
                         moves_possible.append([x_conquer,y_conquer])
                         new_piece  = piece.Piece(x_conquer, y_conquer, curr_piece.color)
                         self.get_possible_moves(new_piece,moves_possible)

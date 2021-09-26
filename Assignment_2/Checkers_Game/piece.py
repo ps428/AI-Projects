@@ -4,10 +4,13 @@ import values
 class Piece:
     def __init__(self, row, column, color):
         self.king = False # initially not a king
+        # Location of piece in the board
         self.x = 0
         self.y = 0
+
         self.row = row
         self.column = column
+        
         self.get_position()
         self.color = color
         
@@ -26,6 +29,3 @@ class Piece:
         self.row = row
         self.column = column
         self.get_position()
-
-    def make_king(self):
-        self.king = True

@@ -4,9 +4,12 @@ import game
 import board
 
 # Setting the dimensions of the window
-window = pygame.display.set_mode((values.WIDTH, values.HEIGHT))
+window = pygame.display.set_mode((values.WIDTH+values.OPTIONS_PANEL_SIZE, values.HEIGHT))
 # Adding a name to the window
 pygame.display.set_caption("Checker's Game with Min Max")
+
+# pygame.draw.rect(window, values.BUTTON_COLOR, (values.BLOCK_SIZE*values.ROWS + values.OPTIONS_PANEL_SIZE//2, values.ROWS//3*values.BLOCK_SIZE,values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+
 
 # Main driver function
 def main():
@@ -33,8 +36,12 @@ def main():
             #       MOUSEBUTTONUP   => button is released
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
-                row, column = get_mouse_position(position)
-                myGame.select_or_move(column, row)
+                x,y = position
+                if(x>values.BLOCK_SIZE*(values.ROWS) or y>values.BLOCK_SIZE*(values.ROWS)):
+                    pass
+                else:
+                    row, column = get_mouse_position(position)
+                    myGame.select_or_move(column, row)
                 
         
         pygame.display.update()
@@ -46,6 +53,7 @@ def main():
 
 def get_mouse_position(position):
     a,b = position
+    #250, 250 pixels
 
     row = a//values.BLOCK_SIZE
     column = b//values.BLOCK_SIZE
