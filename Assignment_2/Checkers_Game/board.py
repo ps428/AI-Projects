@@ -18,6 +18,8 @@ class game_Board:
 
     def draw_blocks(self, window):
         window.fill(values.DARK)
+
+        #OPTIONS PANE
         pygame.draw.rect(window, values.OPTIONS_PANEL, (values.BLOCK_SIZE*values.ROWS, 0, values.OPTIONS_PANEL_SIZE+10, values.ROWS*values.BLOCK_SIZE +10))
         
         #Buttons

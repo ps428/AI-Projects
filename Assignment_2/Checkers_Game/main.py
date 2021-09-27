@@ -36,9 +36,13 @@ def main():
             #       MOUSEBUTTONUP   => button is released
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = pygame.mouse.get_pos()
-                x,y = position
+                x = position[0]
+                y = position[1]
+                x = int(x)
+                y = int(y)
+    
                 if(x>values.BLOCK_SIZE*(values.ROWS) or y>values.BLOCK_SIZE*(values.ROWS)):
-                    pass
+                    get_option(x,y)
                 else:
                     row, column = get_mouse_position(position)
                     myGame.select_or_move(column, row)
@@ -57,7 +61,68 @@ def get_mouse_position(position):
 
     row = a//values.BLOCK_SIZE
     column = b//values.BLOCK_SIZE
-    print(row, column)
     return row, column
+
+def get_option(x,y):
+    x = int(x)
+    y = int(y)
+    
+    # Random
+    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+    y_0 = values.ROWS//3*values.BLOCK_SIZE
+    
+    x_1 = x_0 + values.BLOCK_SIZE*2
+    y_1 = y_0 + values.BLOCK_SIZE*2
+
+    
+    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
+        # random
+        print("Random")
+        pass   
+
+    # Min max
+    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+    y_0 = 1.5*(values.ROWS//3*values.BLOCK_SIZE)
+    x_1 = x_0 + values.BLOCK_SIZE*2
+    y_1 = y_0 + values.BLOCK_SIZE*2
+    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
+        # random
+        print("Min Max")
+        pass   
+
+
+    # Alpha Beta
+    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+    y_0 = 2*(values.ROWS//3*values.BLOCK_SIZE)
+    x_1 = x_0 + values.BLOCK_SIZE*2
+    y_1 = y_0 + values.BLOCK_SIZE*2
+    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
+        # random
+        print("Alpha Beta")
+        pass   
+
+
+    # Restart
+    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+    y_0 = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
+    x_1 = x_0 + values.BLOCK_SIZE*2
+    y_1 = y_0 + values.BLOCK_SIZE*2
+    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
+        # random
+        print("Restart")
+        pass   
+         
+    # Quit
+    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+    y_0 = 3*(values.ROWS//3*values.BLOCK_SIZE)
+    x_1 = x_0 + values.BLOCK_SIZE*2
+    y_1 = y_0 + values.BLOCK_SIZE*2
+    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
+        # random
+        print("Quit")
+        pass   
+        
+
+    pass
 
 main()
