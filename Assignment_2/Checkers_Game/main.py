@@ -70,8 +70,6 @@ def main():
     pygame.quit()
 
 
-
-
 def get_mouse_position(position):
     a,b = position
     #250, 250 pixels

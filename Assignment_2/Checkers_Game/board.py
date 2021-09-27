@@ -29,36 +29,36 @@ class game_Board:
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         pygame.init()
         font = pygame.font.SysFont(None, 32)
-        img1 = font.render('Random Game', True, values.BLUE)
+        img1 = font.render('Random Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+10,y+10))
 
 
         # Min Max Game
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 1.5*(values.ROWS//3*values.BLOCK_SIZE)
-        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        img1 = font.render('MinMax', True, values.BLUE)
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('MinMax', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+45,y+10))
         
         # Alpha Beta Pruning 
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 2*(values.ROWS//3*values.BLOCK_SIZE)
-        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        img1 = font.render('Alpha Beta', True, values.BLUE)
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Alpha Beta', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+25,y+10))
 
         # Restart
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
-        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        img1 = font.render('Restart Game', True, values.BLUE)
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Restart Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+20,y+10))
 
         # Quit
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 3*(values.ROWS//3*values.BLOCK_SIZE)
-        pygame.draw.rect(window, values.LIGHT, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        img1 = font.render('Quit Game', True, values.BLUE)
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('Quit Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+30,y+10))
 
         for row in range(values.ROWS):
