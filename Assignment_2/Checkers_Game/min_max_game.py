@@ -63,5 +63,5 @@ class playGame:
                     x = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
                     y = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
                     # print("circle")
-                    pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//8)
+                    pygame.draw.circle(self.window, values.RED, (x,y), values.BLOCK_SIZE//5, width=2)
                     pygame.display.update()
