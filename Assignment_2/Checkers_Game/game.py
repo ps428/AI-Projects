@@ -31,7 +31,7 @@ class playGame:
                 print("reset selection")
                 self.update()
                 return
-            if [x,y] in self.board.get_possible_moves(self.active_piece, [], False):
+            if (x,y) in self.board.get_valid_moves(self.active_piece).keys():
                 self.make_move(x,y)
                 self.update()
             
@@ -52,6 +52,8 @@ class playGame:
             self.chance = values.BLUE
         else:
             self.chance = values.BLUE
+
+
     # // TODO drawing possible moves
     def draw_possible_moves(self,piece):
         moves = self.board.get_possible_moves(piece, [], False)
@@ -65,3 +67,12 @@ class playGame:
                     # print("circle")
                     pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//8)
                     pygame.display.update()
+        moves = self.board.get_valid_moves(piece)
+        if(moves!=None):
+            for move in moves:
+                x = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+                y = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+                # print("circle")
+                pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//8)
+                pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//2,2)
+                pygame.display.update()
