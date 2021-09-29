@@ -8,6 +8,7 @@ class playGame:
         self.board = board.game_Board()
         self.chance = values.BLUE
         self.window = window
+        self.valid_positions = {}
 
     def update(self):
         self.board.current_status(self.window)
@@ -17,6 +18,7 @@ class playGame:
         self.active_piece = None
         self.board = board.game_Board()
         self.chance = values.BLUE
+        self.valid_positions = {}
         self.update()
     
     def select_or_move(self, x,y):
@@ -24,6 +26,8 @@ class playGame:
             print("vacant",self.active_piece)
             self.active_piece = self.board.get_piece(x,y)
             self.draw_possible_moves(self.active_piece)
+            self.valid_positions = self.board.get_valid_moves(self.active_piece)
+
         else:
             print("peice: ",self.active_piece.row, self.active_piece.column)
             if(x==self.active_piece.row and y == self.active_piece.column):
@@ -33,9 +37,11 @@ class playGame:
                 return
             if (x,y) in self.board.get_valid_moves(self.active_piece).keys():
                 self.make_move(x,y)
+                deads = self.valid_positions[(x,y)]
+                if deads:
+                    self.board.kill(deads)
                 self.update()
             
-
     def make_move(self, x, y):
         # print("from:",self.active_piece.row,self.active_piece.column)
         # print("to:",x,y)

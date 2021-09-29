@@ -360,6 +360,14 @@ class game_Board:
             if len(moves_possible) is 2:
                 return moves_possible
     
+    def kill(self, pieces):
+         for piece in pieces:
+            self.board[piece.row][piece.column] = 0
+            if piece != 0:
+                if piece.color == values.RED:
+                    self.player_count_red -= 1
+                else:
+                    self.player_count_blue -= 1
 
     def get_valid_moves(self, piece):
         moves = {}
