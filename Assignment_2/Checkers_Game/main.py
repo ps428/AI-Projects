@@ -50,9 +50,6 @@ def main():
                         # Min MAx
                         pass
                     if(option==3):
-                        # Alpha Beta
-                        pass
-                    if(option==4):
                         # Restart
                         myGame.reset()
                     if(option==5):
@@ -105,26 +102,15 @@ def get_option(x,y):
         print("Min Max")
         return 2
 
-    # Alpha Beta
+    # Restart
     x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
     y_0 = 2*(values.ROWS//3*values.BLOCK_SIZE)
     x_1 = x_0 + values.BLOCK_SIZE*2
     y_1 = y_0 + values.BLOCK_SIZE//2
     if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
         # random
-        print("Alpha Beta")
-        return 3
-
-
-    # Restart
-    x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
-    y_0 = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
-    x_1 = x_0 + values.BLOCK_SIZE*2
-    y_1 = y_0 + values.BLOCK_SIZE//2
-    if(x >= x_0 and x <= x_1 and y >= y_0 and y <= y_1):
-        # random
         print("Restart")
-        return 4
+        return 3
          
     # Quit
     x_0 = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10

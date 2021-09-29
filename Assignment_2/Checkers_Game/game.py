@@ -26,9 +26,10 @@ class playGame:
             self.draw_possible_moves(self.active_piece)
         else:
             print("piece",self.active_piece.row, self.active_piece.column)
+            
             self.make_move(x,y)
-        self.update()
-
+            self.update()
+        
     def make_move(self, x, y):
         # print("from:",self.active_piece.row,self.active_piece.column)
         # print("to:",x,y)
@@ -47,14 +48,14 @@ class playGame:
             self.chance = values.BLUE
     # // TODO drawing possible moves
     def draw_possible_moves(self,piece):
-        moves = self.board.get_possible_moves(piece, [])
+        moves = self.board.get_possible_moves(piece, [], False)
         if(moves!=None):
             print(moves)
             for move in moves:
                 print(move)
-                if move is not None:
-                    x = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
-                    y = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+                if move is not None and len(move) is 2:
+                    x = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+                    y = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
                     # print("circle")
                     pygame.draw.circle(self.window, values.RED, (x,y), values.BLOCK_SIZE//5, width=2)
                     pygame.display.update()
