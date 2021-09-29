@@ -182,7 +182,6 @@ class game_Board:
                             moves_possible.append(new_moves)
 
                     if(x_n>=0 and y_p<=7):
-                        # print("Blue | Forward | Left")
                         if(self.board[x_n][y_p]==0):
                             print("Blue | Forward | Left")
                             moves_possible.append([x_n,y_p])

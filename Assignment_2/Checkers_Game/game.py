@@ -23,7 +23,7 @@ class playGame:
         if self.active_piece==None or self.active_piece==0:
             print("vacant",self.active_piece)
             self.active_piece = self.board.get_piece(x,y)
-            # self.draw_possible_moves(self.active_piece)
+            self.draw_possible_moves(self.active_piece)
         else:
             print("piece",self.active_piece.row, self.active_piece.column)
             self.make_move(x,y)
@@ -53,8 +53,8 @@ class playGame:
             for move in moves:
                 print(move)
                 if move is not None:
-                    x = move[0] * values.BLOCK_SIZE
-                    y = move[1] * values.BLOCK_SIZE
+                    x = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+                    y = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
                     # print("circle")
                     pygame.draw.circle(self.window, values.RED, (x,y), values.BLOCK_SIZE//5, width=2)
                     pygame.display.update()
