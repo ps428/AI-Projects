@@ -362,6 +362,12 @@ class game_Board:
     
     def kill(self, pieces):
          for piece in pieces:
+            if piece.king:
+                if  piece.color == values.RED:
+                    self.kings_count_red -= 1
+                else:
+                    self.kings_count_blue -= 1        
+
             self.board[piece.row][piece.column] = 0
             if piece != 0:
                 if piece.color == values.RED:
@@ -369,8 +375,25 @@ class game_Board:
                 else:
                     self.player_count_blue -= 1
 
+    def evaluation_function(self):
+        #basic score
+        score = self.player_count_blue - self.player_count_red
+        #a little better scoring by considering kings
+        score += 0.7*(self.kings_count_blue - self.kings_count_red)
+        # TODO can work here for better AI
+
+    def champion(self):
+        if self.player_count_red <=0:
+            return values.BLUE
+        elif self.player_count_blue <=0:
+            return values.RED
+        else:
+            return None
+
     def get_valid_moves(self, piece):
         moves = {}
+        if piece == 0:
+            return
         left = piece.column - 1
         right = piece.column + 1
         row = piece.row

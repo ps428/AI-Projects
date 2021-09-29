@@ -1,3 +1,4 @@
+import min_max_game
 import pygame
 import values
 import game
@@ -31,6 +32,15 @@ def main():
             if event.type == pygame.QUIT:
                 playing = False
         
+
+            # if myGame.board.champion() != None:
+            #     print(game.board.champion())
+            #     run = False
+
+            # if myGame.chance == values.BLUE:
+            #     value, new_board = min_max_game.minmax(myGame.get_board(), 4, values.BLUE, myGame)
+                
+
             # If the event is mouse button cliked, then do something
             # NOTE: MOUSEBUTTONDOWN => button is clicked
             #       MOUSEBUTTONUP   => button is released

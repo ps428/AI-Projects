@@ -6,7 +6,7 @@ class playGame:
     def __init__(self, window):
         self.active_piece = None
         self.board = board.game_Board()
-        self.chance = values.BLUE
+        self.chance = values.RED
         self.window = window
         self.valid_positions = {}
 
@@ -35,11 +35,15 @@ class playGame:
                 print("reset selection")
                 self.update()
                 return
-            if (x,y) in self.board.get_valid_moves(self.active_piece).keys():
-                self.make_move(x,y)
+    
+            self.valid_positions = self.board.get_valid_moves(self.active_piece)
+
+            if (x,y) in self.valid_positions:
+                print("valid pos:" ,self.valid_positions)
                 deads = self.valid_positions[(x,y)]
                 if deads:
                     self.board.kill(deads)
+                self.make_move(x,y)
                 self.update()
             
     def make_move(self, x, y):
@@ -52,13 +56,15 @@ class playGame:
         self.board.make_move(self.active_piece, x, y)
         # self.active_piece.move(x,y)
         self.active_piece = None
+        self.change_chance()
 
     def change_chance(self):
         if self.chance == values.RED:
             self.chance = values.BLUE
         else:
             self.chance = values.BLUE
-
+        # resetting the valid positions to empty dictionary
+        self.valid_positions = {}
 
     # // TODO drawing possible moves
     def draw_possible_moves(self,piece):
@@ -82,3 +88,10 @@ class playGame:
                 pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//8)
                 pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//2,2)
                 pygame.display.update()
+    
+    def ai_move(self, board):
+        self.board = board
+        self.change_chance()
+    
+    def get_board(self):
+        return self.board
