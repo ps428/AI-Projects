@@ -4,14 +4,26 @@ import game
 import board
 import time
 import copy
+from timeit import Timer
 
-depth = 3
+depth = 1
 # Setting the dimensions of the window
 window = pygame.display.set_mode((values.WIDTH+values.OPTIONS_PANEL_SIZE, values.HEIGHT))
 # Adding a name to the window
 pygame.display.set_caption("Checker's Game with Min Max")
 
 # pygame.draw.rect(window, values.BUTTON_COLOR, (values.BLOCK_SIZE*values.ROWS + values.OPTIONS_PANEL_SIZE//2, values.ROWS//3*values.BLOCK_SIZE,values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+
+def timeme(method):
+    def wrapper(*args, **kw):
+        startTime = int(round(time.time() * 1000))
+        result = method(*args, **kw)
+        endTime = int(round(time.time() * 1000))
+
+        print(endTime - startTime,'ms')
+        return result
+
+    return wrapper
 
 # ai game type
 def play_ai(myGame):
@@ -53,7 +65,11 @@ def ai_play():
         if myGame.chance == values.BLUE:
             count_red = myGame.board.player_count_red
             count_blue = myGame.board.player_count_blue
+            tic = time.perf_counter()
             play_ai(myGame)
+            toc = time.perf_counter()
+            time_taken = toc - tic
+            print(time_taken)
             count_red_moved = myGame.board.player_count_red
             count_blue_moved = myGame.board.player_count_blue
             no_kill_moves+=1
