@@ -39,11 +39,18 @@ class game_Board:
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         img1 = font.render('MinMax', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+45,y+10))
+        
         # Restart
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 2*(values.ROWS//3*values.BLOCK_SIZE)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         img1 = font.render('Restart Game', True, values.BUTTON_TEXT_COLOR)
+        window.blit(img1, (x+20,y+10))
+
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
+        img1 = font.render('2 Player', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+20,y+10))
 
         # Quit

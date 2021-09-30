@@ -59,6 +59,8 @@ class playGame:
     #     self.active_piece = None
     #     self.change_chance()
 
+        
+
     def select_or_move(self, row, col):
         if self.active_piece:
             result = self.move(row, col)
@@ -120,9 +122,6 @@ class playGame:
                 pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//2,2)
                 pygame.display.update()
     
-    def ai_move(self, board):
-        self.board = board
-        print("called")
     
     def get_board(self):
         return self.board
@@ -138,3 +137,16 @@ class playGame:
 
     def champion(self):
         return self.board.champion()
+
+    
+    def play_ai(self, board):
+        self.board = board
+        print("AI move")
+    
+    def play_random(self):
+        print("Random move")
+
+    
+    def two_player(self):
+        print("Two Player move")
+        

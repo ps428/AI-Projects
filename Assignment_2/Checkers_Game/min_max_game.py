@@ -21,7 +21,6 @@ def minmax(board_state, depth, max_player, game):
         ideal_move = None
         for move in get_all_moves(board_state, values.RED, game):
             score = minmax(move, depth-1, True, game)[0]
-            print(min_score, score)
             min_score = min(min_score, score)
             if min_score == score:
                 ideal_move = move
