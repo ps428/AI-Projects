@@ -1,67 +1,53 @@
+import copy
 import pygame
 import values
-import board
 
-class playGame:
-    def __init__(self, window):
-        self.active_piece = None
-        self.board = board.game_Board()
-        self.chance = values.BLUE
-        self.window = window
-
-    def update(self):
-        self.board.current_status(self.window)
-        pygame.display.update()
+def minmax(board_state, depth, max_player, game):
+    if depth == 0 or board_state.champion() != None:
+        return board_state.evaluation_function(), board_state
     
-    def reset(self):
-        self.active_piece = None
-        self.board = board.game_Board()
-        self.chance = values.BLUE
-        self.update()
-    
-    def select_or_move(self, x,y):
-        if self.active_piece==None or self.active_piece==0:
-            print("vacant",self.active_piece)
-            self.active_piece = self.board.get_piece(x,y)
-            self.draw_possible_moves(self.active_piece)
-        else:
-            print("peice: ",self.active_piece.row, self.active_piece.column)
-            if(x==self.active_piece.row and y == self.active_piece.column):
-                self.active_piece = None
-                print("reset selection")
-                self.update()
-                return
-            if [x,y] in self.board.get_possible_moves(self.active_piece, [], False):
-                self.make_move(x,y)
-                self.update()
-            
+    if max_player:
+        max_score = float('-inf')
+        ideal_move = None
+        for move in get_all_moves(board_state, values.BLUE, game):
+            score = minmax(move, depth-1, False, game)[0]
+            max_score = max(max_score, score)
+            if max_score == score:
+                ideal_move = move
+        return max_score, ideal_move
 
-    def make_move(self, x, y):
-        # print("from:",self.active_piece.row,self.active_piece.column)
-        # print("to:",x,y)
-        if self.board.board[x][y] != 0:
-            self.active_piece = None
-            return
+    else:
+        min_score = float('inf')
+        ideal_move = None
+        for move in get_all_moves(board_state, values.RED, game):
+            score = minmax(move, depth-1, True, game)[0]
+            min_score = min(min_score, score)
+            if min_score == score:
+                ideal_move = move
+        return min_score, ideal_move
 
-        self.board.make_move(self.active_piece, x, y)
-        # self.active_piece.move(x,y)
-        self.active_piece = None
+def get_all_moves(board_state, color, game):
+    moves = []
+    for piece in board_state.get_all_pieces_colorwise(color):
+        valid_moves = board_state.get_valid_moves(piece)
+        for move, skip in valid_moves.items():
+            draw_moves(game, board_state, piece)
 
-    def change_chance(self):
-        if self.chance == values.RED:
-            self.chance = values.BLUE
-        else:
-            self.chance = values.BLUE
-    # // TODO drawing possible moves
-    def draw_possible_moves(self,piece):
-        moves = self.board.get_possible_moves(piece, [], False)
-        if(moves!=None):
-            print(moves)
-            for move in moves:
-                print(move)
-                if move is not None and len(move) is 2:
-                    x = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
-                    y = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
-                    # print("circle")
-                    pygame.draw.circle(self.window, values.RED, (x,y), values.BLOCK_SIZE//5, width=2)
-                    pygame.display.update()
+            curr_board = copy.deepcopy(board_state)
+            curr_piece = curr_board.get_piece(piece.row, piece.column)
+            new_board_state = simulation(curr_piece, move, curr_board, game, skip)
+            moves.append(new_board_state)
+    return moves
+
+def simulation(piece, move, board, game, skip):
+    board.make_move(piece, move[0], move[1])
+    if skip:
+        board.kill(skip)
+    return board
+
+def draw_moves(game, board, piece):
+    valid_moves = board.get_valid_moves(piece)
+    board.draw_blocks(game.window)
+    pygame.draw.circle(game.window, (0,255,0), (piece.x, piece.y), 50, 5)
+    game.draw_valid_moves(valid_moves.keys())
+    pygame.display.update()
