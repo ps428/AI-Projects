@@ -5,6 +5,7 @@ import game
 import board
 import time
 
+depth = 2
 # Setting the dimensions of the window
 window = pygame.display.set_mode((values.WIDTH+values.OPTIONS_PANEL_SIZE, values.HEIGHT))
 # Adding a name to the window
@@ -13,12 +14,13 @@ pygame.display.set_caption("Checker's Game with Min Max")
 # pygame.draw.rect(window, values.BUTTON_COLOR, (values.BLOCK_SIZE*values.ROWS + values.OPTIONS_PANEL_SIZE//2, values.ROWS//3*values.BLOCK_SIZE,values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
 
 def play_ai(myGame):
-    value, new_board = min_max_game.minmax(myGame.get_board(), 2, values.BLUE, myGame)
+    value, new_board = min_max_game.minmax(myGame.get_board(), depth, values.BLUE, myGame)
     myGame.play_ai(new_board)
     myGame.change_chance()
 
-def random_game(myGame):    
-    myGame.play_random()
+def random_game(myGame):
+    CPU_pieces = myGame.board.get_all_pieces_colorwise(values.BLUE)  
+    myGame.play_random(CPU_pieces)
     myGame.change_chance()
 
 def two_player_game(myGame):

@@ -143,10 +143,14 @@ class playGame:
         self.board = board
         print("AI move")
     
-    def play_random(self):
+    def play_random(self, pieces):
+        for piece in pieces:    
+            moves = self.board.get_valid_moves(piece)
+            for key in moves.keys():
+                self.board.make_move(piece, key[0], key[1])
+                return
         print("Random move")
 
     
     def two_player(self):
         print("Two Player move")
-        
