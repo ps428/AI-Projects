@@ -10,6 +10,7 @@ class game_Board:
         self.player_count_red = 12
         self.kings_count_blue = 0
         self.kings_count_red = 0
+        self.kill_or_not = False
         self.make_pieces()
         
     def fill_block(window, row, column):
@@ -21,13 +22,19 @@ class game_Board:
 
         #OPTIONS PANE
         pygame.draw.rect(window, values.OPTIONS_PANEL, (values.BLOCK_SIZE*values.ROWS, 0, values.OPTIONS_PANEL_SIZE+10, values.ROWS*values.BLOCK_SIZE +10))
+        pygame.init()
         
         #Buttons
         # Random Game
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = values.ROWS//3*values.BLOCK_SIZE
+        font = pygame.font.SysFont(None, 48)
+        img1 = font.render('Checkers Game', True, values.OPTION_TEXT)
+        window.blit(img1, (x-30,y-80))
+
+        
+        pygame.draw.rect(window, values.BLACK, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2),8)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        pygame.init()
         font = pygame.font.SysFont(None, 32)
         img1 = font.render('Random Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+10,y+10))
@@ -36,29 +43,70 @@ class game_Board:
         # Min Max Game
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 1.5*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.BLACK, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2),8)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
-        img1 = font.render('MinMax', True, values.BUTTON_TEXT_COLOR)
+        img1 = font.render('MiniMax', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+45,y+10))
         
         # Restart
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 2*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.BLACK, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2),8)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         img1 = font.render('Restart Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+20,y+10))
 
+        # 2 Player 
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 2.5*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.BLACK, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2),8)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         img1 = font.render('2 Player', True, values.BUTTON_TEXT_COLOR)
-        window.blit(img1, (x+20,y+10))
+        window.blit(img1, (x+45,y+10))
 
         # Quit
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = 3*(values.ROWS//3*values.BLOCK_SIZE)
+        pygame.draw.rect(window, values.BLACK, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2),8)
         pygame.draw.rect(window, values.BUTTON_COLOR, (x, y, values.BLOCK_SIZE*2, values.BLOCK_SIZE//2))
         img1 = font.render('Quit Game', True, values.BUTTON_TEXT_COLOR)
         window.blit(img1, (x+30,y+10))
+
+        img1 = font.render('SCOREBOARD', True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+10,y+60))
+        
+        x += 20
+        score_blue  ="Blue"
+        img1 = font.render(score_blue, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x,y+90))
+
+        score_red  ="Red"
+        img1 = font.render(score_red, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+85,y+90))
+
+        term = "Score"
+        img1 = font.render(term, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x-70,y+120))
+
+        score_blue  = str(12 - self.player_count_blue)
+        img1 = font.render(score_blue, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+20,y+120))
+
+        score_red  = str(12 - self.player_count_red)
+        img1 = font.render(score_red, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+100,y+120))
+
+        term = "Kings"
+        img1 = font.render(term, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x-70,y+150))
+
+        score_blue  = str(self.kings_count_blue)
+        img1 = font.render(score_blue, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+20,y+150))
+
+        score_red  = str(self.kings_count_red)
+        img1 = font.render(score_red, True, values.OPTIONS_SCORECARD)
+        window.blit(img1, (x+100,y+150))
 
         for row in range(values.ROWS):
             for column in range(values.COLUMNS):
@@ -125,6 +173,7 @@ class game_Board:
 
         # Dealing with kings
         if x == 0 or x == values.ROWS-1:
+            piece.make_king()
             piece.king = True
 
             if piece.color == values.BLUE:
@@ -374,10 +423,13 @@ class game_Board:
                     self.kings_count_red -= 1
                 else:
                     self.kings_count_blue -= 1        
+            
 
             self.board[piece.row][piece.column] = 0
             if piece != 0:
-                if piece.color == values.RED:
+                values.aud_kill_made.play()
+            
+                if piece.color == values.BLUE:
                     self.player_count_red -= 1
                 else:
                     self.player_count_blue -= 1
@@ -386,7 +438,7 @@ class game_Board:
         #basic score
         score = self.player_count_blue - self.player_count_red
         #a little better scoring by considering kings
-        score += 0.7*(self.kings_count_blue - self.kings_count_red)
+        score += 0.5*(self.kings_count_blue - self.kings_count_red)
         # TODO can work here for better AI
         return score
 

@@ -1,3 +1,8 @@
+import pygame
+pygame.init()
+pygame.font.init()
+pygame.mixer.init() 
+
 HEIGHT = 700
 WIDTH = 700
 
@@ -22,9 +27,15 @@ DARK = (32,178,170)
 # DARK = (140,235,170) # 1
 
 OPTIONS_PANEL_SIZE = HEIGHT//2
-OPTIONS_PANEL = (119,136,153) 
-BUTTON_COLOR = (220,220,220)
+OPTIONS_PANEL = (66, 5, 22) 
+BUTTON_COLOR = (255,112,102)
+OPTION_TEXT = (240, 165, 0)
 BUTTON_TEXT_COLOR = (0,0,0)
+OPTIONS_SCORECARD = (244, 59, 134)
 ROWS = 8
 COLUMNS = 8
 BLOCK_SIZE = HEIGHT//ROWS
+
+aud_king_made = pygame.mixer.Sound('king.wav')
+aud_movement_mode = pygame.mixer.Sound('move.wav')
+aud_kill_made = pygame.mixer.Sound('kill.wav')

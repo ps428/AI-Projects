@@ -86,6 +86,8 @@ class playGame:
                     if skipped:
                         self.board.kill(skipped)
                     self.change_chance()
+            values.aud_movement_mode.play()
+        
         else:
             return False
 

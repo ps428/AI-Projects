@@ -29,3 +29,7 @@ class Piece:
         self.row = row
         self.column = column
         self.get_position()
+
+    def make_king(self):
+        self.king = True
+        values.aud_king_made.play()

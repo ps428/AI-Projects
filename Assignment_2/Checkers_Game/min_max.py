@@ -5,7 +5,8 @@ import game
 import board
 import time
 
-depth = 2
+depth = 3
+
 # Setting the dimensions of the window
 window = pygame.display.set_mode((values.WIDTH+values.OPTIONS_PANEL_SIZE, values.HEIGHT))
 # Adding a name to the window
@@ -39,7 +40,6 @@ def ai_play():
 
     myGame = game.playGame(window)
     myGame.update()
-
         
 
     # Think over it to stop min max
@@ -49,6 +49,7 @@ def ai_play():
         # if myGame.chance == values.BLUE and not user:
         if myGame.chance == values.BLUE:
             play_ai(myGame)
+            
             # user = True 
             
         if myGame.champion() != None:
@@ -333,4 +334,7 @@ def get_option(x,y):
         return 5
         
 
-
+def draw_condition(no_kills):
+    if no_kills>=50:
+        return True
+    return False
