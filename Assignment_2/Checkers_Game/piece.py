@@ -6,14 +6,18 @@ class Piece:
         self.king = False # initially not a king
         # Location of piece in the board
         self.x = 0
-        self.y = 0
-
         self.row = row
+        self.corner_piece = False
         self.column = column
+        self.y = 0
         
         self.get_position()
         self.color = color
-        
+    
+    def is_corner(self):
+        if self.row == 0 or self.column == 0 or self.row == 7 or self.column == 7:
+            self.corner_piece = True
+            
     def get_position(self):
         self.x = self.column*values.BLOCK_SIZE + values.BLOCK_SIZE//2
         self.y = self.row*values.BLOCK_SIZE + values.BLOCK_SIZE//2
@@ -33,3 +37,4 @@ class Piece:
     def make_king(self):
         self.king = True
         values.aud_king_made.play()
+    

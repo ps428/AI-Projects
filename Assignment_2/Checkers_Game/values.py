@@ -3,6 +3,12 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init() 
 
+# audio files initialisations
+aud_king_made = pygame.mixer.Sound('king.wav')
+aud_movement_mode = pygame.mixer.Sound('move.wav')
+aud_kill_made = pygame.mixer.Sound('kill.wav')
+
+
 HEIGHT = 700
 WIDTH = 700
 
@@ -35,7 +41,3 @@ OPTIONS_SCORECARD = (244, 59, 134)
 ROWS = 8
 COLUMNS = 8
 BLOCK_SIZE = HEIGHT//ROWS
-
-aud_king_made = pygame.mixer.Sound('king.wav')
-aud_movement_mode = pygame.mixer.Sound('move.wav')
-aud_kill_made = pygame.mixer.Sound('kill.wav')

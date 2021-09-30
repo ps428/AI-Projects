@@ -2,7 +2,7 @@ from typing import Collection
 import pygame
 import piece
 import values
-
+import time
 class game_Board:
     def __init__(self):
         self.board = []
@@ -11,6 +11,7 @@ class game_Board:
         self.kings_count_blue = 0
         self.kings_count_red = 0
         self.kill_or_not = False
+        self.drawn = False
         self.make_pieces()
         
     def fill_block(window, row, column):
@@ -29,7 +30,12 @@ class game_Board:
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = values.ROWS//3*values.BLOCK_SIZE
         
-        
+        if self.drawn is True:
+            font = pygame.font.SysFont(None, 48)
+            img1 = font.render('Draw Game', True, values.OPTION_TEXT)
+            window.blit(img1, (x+10,y-120))
+            
+
         font = pygame.font.SysFont(None, 48)
         img1 = font.render('Checkers Game', True, values.OPTION_TEXT)
         window.blit(img1, (x-30,y-80))
@@ -440,8 +446,10 @@ class game_Board:
         #basic score
         score = self.player_count_blue - self.player_count_red
         #a little better scoring by considering kings
-        score += 0.5*(self.kings_count_blue - self.kings_count_red)
+        score += 0.7*(self.kings_count_blue - self.kings_count_red)
+        
         # TODO can work here for better AI
+        
         return score
 
     def champion(self):
@@ -534,3 +542,6 @@ class game_Board:
             right += 1
         
         return moves
+
+    def draw_game_now(self,window):
+        self.drawn = True
