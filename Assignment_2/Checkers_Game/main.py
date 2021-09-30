@@ -3,6 +3,7 @@ import pygame
 import values
 import game
 import board
+FPS = 60
 
 # Setting the dimensions of the window
 window = pygame.display.set_mode((values.WIDTH+values.OPTIONS_PANEL_SIZE, values.HEIGHT))
@@ -24,22 +25,26 @@ def main():
 
     myGame = game.playGame(window)
     myGame.update()
+    clock = pygame.time.Clock()
+    
     while playing:
+        clock.tick(FPS)
+
+        if myGame.chance == values.BLUE:
+            value, new_board = min_max_game.minmax(myGame.get_board(), 1, values.BLUE, myGame)
+            myGame.ai_move(new_board)
+            
+        if myGame.champion() != None:
+            print(game.champion())
+            run = False
 
         # Look at the events being triggered by the user in the game
         for event in pygame.event.get():
             # If a event to end the game is triggered, then quit the game
             if event.type == pygame.QUIT:
                 playing = False
-        
-
-            # if myGame.board.champion() != None:
-            #     print(game.board.champion())
-            #     run = False
-
-            # if myGame.chance == values.BLUE:
-            #     value, new_board = min_max_game.minmax(myGame.get_board(), 4, values.BLUE, myGame)
-                
+    
+            
 
             # If the event is mouse button cliked, then do something
             # NOTE: MOUSEBUTTONDOWN => button is clicked
@@ -70,7 +75,8 @@ def main():
                 else:
                     row, column = get_mouse_position(position)
                     myGame.select_or_move(column, row)
-                
+        myGame.update()
+
         
         pygame.display.update()
         

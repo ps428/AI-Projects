@@ -381,6 +381,7 @@ class game_Board:
         #a little better scoring by considering kings
         score += 0.7*(self.kings_count_blue - self.kings_count_red)
         # TODO can work here for better AI
+        return score
 
     def champion(self):
         if self.player_count_red <=0:
