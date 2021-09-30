@@ -12,6 +12,19 @@ class playGame:
 
     def update(self):
         self.board.current_status(self.window)
+        x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
+        y = values.ROWS//3*values.BLOCK_SIZE
+        
+        pygame.init()
+        font = pygame.font.SysFont(None, 24)
+        
+        if self.chance == values.RED:
+            img1 = font.render('Red Turn', True, values.OPTION_TEXT)
+        else:
+            img1 = font.render('Purple Turn', True, values.OPTION_TEXT)
+
+        self.window.blit(img1, (x+50,y-140))
+
         self.draw_valid_moves(self.valid_positions)
         pygame.display.update()
     

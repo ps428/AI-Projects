@@ -28,6 +28,8 @@ class game_Board:
         # Random Game
         x = values.BLOCK_SIZE*values.ROWS + 2*values.OPTIONS_PANEL_SIZE//10
         y = values.ROWS//3*values.BLOCK_SIZE
+        
+        
         font = pygame.font.SysFont(None, 48)
         img1 = font.render('Checkers Game', True, values.OPTION_TEXT)
         window.blit(img1, (x-30,y-80))
@@ -76,7 +78,7 @@ class game_Board:
         window.blit(img1, (x+10,y+60))
         
         x += 20
-        score_blue  ="Blue"
+        score_blue  ="Purple"
         img1 = font.render(score_blue, True, values.OPTIONS_SCORECARD)
         window.blit(img1, (x,y+90))
 
