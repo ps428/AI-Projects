@@ -61,7 +61,7 @@ class playGame:
 
     def select_or_move(self, row, col):
         if self.active_piece:
-            result = self._move(row, col)
+            result = self.move(row, col)
             if not result:
                 self.active_piece = None
                 self.select_or_move(row, col)
@@ -74,14 +74,16 @@ class playGame:
             
         return False
 
-    def _move(self, row, col):
+    def move(self, row, col):
         piece = self.board.get_piece(row, col)
-        if self.active_piece and piece == 0 and (row, col) in self.valid_positions:
-            self.board.make_move(self.active_piece, row, col)
-            skipped = self.valid_positions[(row, col)]
-            if skipped:
-                self.board.kill(skipped)
-            self.change_chance()
+        if self.active_piece: 
+            if piece == 0:
+                if (row, col) in self.valid_positions:
+                    self.board.make_move(self.active_piece, row, col)
+                    skipped = self.valid_positions[(row, col)]
+                    if skipped:
+                        self.board.kill(skipped)
+                    self.change_chance()
         else:
             return False
 
@@ -91,7 +93,7 @@ class playGame:
         if self.chance == values.RED:
             self.chance = values.BLUE
         else:
-            self.chance = values.BLUE
+            self.chance = values.RED
         # resetting the valid positions to empty dictionary
         self.valid_positions = {}
 
@@ -121,7 +123,6 @@ class playGame:
     def ai_move(self, board):
         self.board = board
         print("called")
-        self.change_chance()
     
     def get_board(self):
         return self.board
@@ -129,7 +130,11 @@ class playGame:
     def draw_valid_moves(self, moves):
         for move in moves:
             row, col = move
-            pygame.draw.circle(self.window, values.BLUE, (col * values.BLOCK_SIZE +  values.BLOCK_SIZE//2, row *  values.BLOCK_SIZE +  values.BLOCK_SIZE//2), 15)
+            x = move[1] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+            y = move[0] * values.BLOCK_SIZE + values.BLOCK_SIZE//2
+            # print("circle")
+            pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//8)
+            pygame.draw.circle(self.window, values.CHANCE, (x,y), values.BLOCK_SIZE//2,2)
 
     def champion(self):
         return self.board.champion()

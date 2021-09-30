@@ -3,6 +3,7 @@ import pygame
 import values
 import game
 import board
+import time
 FPS = 60
 
 # Setting the dimensions of the window
@@ -26,13 +27,20 @@ def main():
     myGame = game.playGame(window)
     myGame.update()
     clock = pygame.time.Clock()
-    
+
+
+    # Think over it to stop min max
+    user = True
     while playing:
         clock.tick(FPS)
+        print(myGame.chance)
 
+        # if myGame.chance == values.BLUE and not user:
         if myGame.chance == values.BLUE:
             value, new_board = min_max_game.minmax(myGame.get_board(), 1, values.BLUE, myGame)
             myGame.ai_move(new_board)
+            myGame.change_chance()
+            # user = True 
             
         if myGame.champion() != None:
             print(game.champion())
@@ -74,12 +82,12 @@ def main():
                     
                 else:
                     row, column = get_mouse_position(position)
-                    myGame.select_or_move(column, row)
+                    user = myGame.select_or_move(column, row)
+                    user = not user
+
         myGame.update()
 
-        
-        pygame.display.update()
-        
+            
     pygame.quit()
 
 
