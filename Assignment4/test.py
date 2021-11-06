@@ -1,32 +1,30 @@
-import block
+import class_name
+import play_game
 
-Table = block.Table()
+Table = class_name.Table()
 
 initial_state = {
-    'ON':[['A','B'],['C','D']],
+    'BLOCKS':['A','B','C','D'],
+    'ON':[('A','B'),('C','D')],
+    'ONT':['B','D'],
     'CLR':['C','A']
 }
 
 final_state = {
-    'ON':['C','D'],
+    'BLOCKS':['A','B','C','D'],
+    'ON':[('C','D')],
     'ONT':['A','B'],
-    'CLR':['A','B','C']    
+    'CLR':['A','B','C']
 }
 
 
-Table.add_block('A')
-Table.add_block('B')
-Table.add_block('C')
-Table.add_block('D')
+Table1 = play_game.initiate_game(initial_state, Table)
 
-Table.PU('A')
-Table.S('A','B')
 
-Table.PU('C')
-Table.S('C','D')
 # initial condition met
 print("INITIAL STATE:-")
-print(initial_state)
+for key,value in initial_state.items():
+    print(key,value)
 
 Table.print_table()
 
@@ -41,4 +39,10 @@ print("Putdown A")
 Table.print_table()
 
 print("FINAL STATE:-")
-print(final_state)
+for key,value in final_state.items():
+    print(key,value)
+
+print("\n-----------------------------------------------")
+print("System generated final state")
+Table1 = play_game.initiate_game(final_state, class_name.Table())
+Table1.print_table()

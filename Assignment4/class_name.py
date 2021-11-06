@@ -2,26 +2,36 @@ from termcolor import colored
 
 
 class Block:
-    def __init__(self,value):
+    def __init__(self, value):
         self.value = value
         self.on_table = True
         self.clear_top = True
 
 class Table:
     def __init__(self):
-        self.on_dict = {}
+        # on_dic = {(A,B),(B,C)}
+        self.one_over_another_dictionary = {}
         self.on_table_list = []
         self.clear_top_list = []
         self.holding_list = []
 
     def hold(self, X):
         if(self.arm_empty()):
-            if(X.on_table or X.clear_top):
+            if(X.clear_top):
                 self.holding_list.append(X)
+                X.clear_top = False
+
+                for block in self.clear_top_list:
+                    if block.value == X.value:
+                        X = block
+                self.clear_top_list.remove(X)
+                
     
     def clear(self, X):
         if(not X.clear_top):
             X.clear_top = True
+            self.clear_top_list.append(X)
+
     
     def arm_empty(self):
         if(len(self.holding_list) is 0):
@@ -47,18 +57,20 @@ class Table:
         # precondition: arm is empty
         if(self.arm_empty()):
             # precondition: empty top and on table, not in any stack
-            if(X.clear_top == True) and X.on_table == True:
+            if(X.clear_top == True and X.on_table == True):
                 
                 # post condition: holding now and arm is not empty
                 self.hold(X)
                 # del contition: not on table now
                 X.on_table = False
 
+                #TODO JJ: Should top be blocked
+
                 # del contition: not on table list now
                 for block in self.on_table_list:
                     if block.value is X.value:
-                        X = block
-                self.on_table_list.remove(X)
+                        Y = block
+                self.on_table_list.remove(Y)
                 
     def stack_now(self, X, Y):
         # precondition: y has empty top and x is being in the arm now i.e. hold(x)
@@ -66,6 +78,8 @@ class Table:
 
             # del condition: top of y is not clear now
             Y.clear_top = False
+            X.clear_top = True
+            self.clear_top_list.append(X)
 
             for block in self.clear_top_list:
                     if block.value is Y.value:
@@ -76,12 +90,12 @@ class Table:
             self.holding_list.pop()
 
             # post condition: added (X,Y) to on dictionary
-            self.on_dict[Y] = X
+            self.one_over_another_dictionary[Y] = X
 
     def unstack_now(self, X, Y):
         unstackable = False
         # precondition: x,y is in the on dictionary
-        for key, value in self.on_dict.items():
+        for key, value in self.one_over_another_dictionary.items():
             if(Y.value is key.value and X.value is value.value):
                 Y = key
                 X = value
@@ -92,14 +106,13 @@ class Table:
         if(unstackable and X.clear_top == True and self.arm_empty()):
             
             # del condition: remove (X,Y) from on dictionary
-            self.on_dict.pop(Y)
+            self.one_over_another_dictionary.pop(Y)
 
             # post condition: holding X now and arm is not empty
             self.hold(X)
 
             # post condition: top of Y is now empty
             self.clear(Y)
-            self.clear_top_list.append(Y)
             
     # Main functions
     def PD(self):
@@ -130,8 +143,8 @@ class Table:
     def print_table(self):
         print('\n-----------------------------------------------------------\n')
 
-        for key, value in self.on_dict.items():
-            print("ON: [",key.value,", ",value.value,"]")
+        for key, value in self.one_over_another_dictionary.items():
+            print("ON: [",value.value,", ",key.value,"]")
 
         print()
         for block in self.on_table_list:
