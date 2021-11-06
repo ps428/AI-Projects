@@ -22,10 +22,12 @@ class Operations:
         pass
     
     # to store delete post conditions
+    # Should become false after execution
     def delete(self):
         pass
     
     # to store add post conidtions
+    # Should become true after execution
     def add(self):
         pass
 
@@ -44,13 +46,13 @@ class S(Operations):
         return "S"
     
     def precondition(self):
-        return [predicates.Clear(self.Y), predicates.Holding(self.X)]
+        return [predicates.CLEAR(self.Y), predicates.HOLDING(self.X)]
     
     def delete(self):
-        return [predicates.Clear(self.Y), predicates.Holding(self.X)]
+        return [predicates.CLEAR(self.Y), predicates.HOLDING(self.X)]
 
     def add(self):
-        return [predicates.ArmEmpty()(), predicates.On(self.X, self.Y)]
+        return [predicates.ARMEMPTY(), predicates.ON(self.X, self.Y)] # TODO x should be clear nows
 
 
 class US(Operations):
@@ -68,13 +70,13 @@ class US(Operations):
         return "US"
 
     def precondition(self):
-        return [predicates.ArmEmpty(), predicates.On(self.X, self.Y), predicates.Clear(self.X) ]
+        return [predicates.ARMEMPTY(), predicates.ON(self.X, self.Y), predicates.CLEAR(self.X) ]
 
     def delete(self):
-        return [predicates.ArmEmpty(), predicates.On(self.X, self.Y)]
+        return [predicates.ARMEMPTY(), predicates.ON(self.X, self.Y)]# TODO x should not be clears
 
     def add(self):
-        return [predicates.Clear(self.Y), predicates.Holding(self.X)]
+        return [predicates.CLEAR(self.Y), predicates.HOLDING(self.X)]
 
 
 class PU(Operations):
@@ -91,13 +93,13 @@ class PU(Operations):
         return "PU"
 
     def precondition(self):
-        return [predicates.Clear(self.X), predicates.OnTable(self.X), predicates.ArmEmpty()]
+        return [predicates.CLEAR(self.X), predicates.ONTABLE(self.X), predicates.ARMEMPTY()]
 
     def delete(self):
-        return [predicates.ArmEmpty(), predicates.OnTable(self.X)]
+        return [predicates.ARMEMPTY(), predicates.ONTABLE(self.X)] # TODO x should not be clear
 
     def add(self):
-        return [predicates.Holding(self.X)]
+        return [predicates.HOLDING(self.X)]
 
 
 
@@ -115,13 +117,13 @@ class PD(Operations):
         return "PD"
 
     def precondition(self):
-        return [predicates.Holding(self.X)]
+        return [predicates.HOLDING(self.X)]
     
     def delete(self):
-        return [predicates.Holding(self.X)]
+        return [predicates.HOLDING(self.X)]
 
     def add(self):
-        return [predicates.ArmEmpty(), predicates.OnTable(self.X)]
+        return [predicates.ARMEMPTY(), predicates.ONTABLE(self.X)]# TODO x should be clear now
 
 
 

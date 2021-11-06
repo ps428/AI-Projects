@@ -1,6 +1,6 @@
 # Defining all the predicates in this file.
 # Keeping a Predicate class and extending its child nodes
-# Clear, ArmEmpty, Holding, OnTable, On
+# CLEAR, ARMEMPTY, HOLDING, ONTABLE, ON
 import operations
 
 class Predicate:
@@ -21,10 +21,11 @@ class Predicate:
         pass
 
 
-class Clear(Predicate):
+class CLEAR(Predicate):
     def __init__(self, X):
         self.X = X
     
+    #CLEAR(X)
     def string_representation(self):
         return "CLEAR("+self.X+")"
     
@@ -36,31 +37,36 @@ class Clear(Predicate):
     
     def perform_action(self, state_s0):
         for predicate in state_s0:
-            if predicate.base_name == "ON" and predicate.Y == self.X:
-                return operations.US(predicate.X, predicate.Y)
+            # print(predicate.X, predicate.base_name())
+            # if predicate.base_name is "ON":
+            #     print("asdsad") 
+            if predicate.base_name() == "ON" and predicate.Y == self.X:
+                # print("TRUE ya nahi")
+                return [operations.US(predicate.X, predicate.Y)]
+        # return None
 
 
-class ArmEmpty(Predicate):
+class ARMEMPTY(Predicate):
     def __init__(self):
        pass
     
     def string_representation(self):
-        return "ARMEMPTY"
+        return "ARMEMPTY()"
     
     def is_equal(self, testing_object):
         return super().is_equal(testing_object)
     
     def base_name(self):
-        return "AE"
+        return "ARMEMPTY"
     
     def perform_action(self, state_s0 = []):
         for predicate in state_s0:
-            if predicate.base_name == "HOLDING":
-                return operations.PD(predicate.X)
+            if predicate.base_name() == "HOLDING":
+                return [operations.PD(predicate.X)]
         return None
 
 
-class Holding(Predicate):
+class HOLDING(Predicate):
     def __init__(self, X):
         self.X = X
     
@@ -74,19 +80,22 @@ class Holding(Predicate):
         return "HOLDING"
     
     def perform_action(self, state_s0):
-        if OnTable(self.X) in state_s0:
-            return operations.PU(self.X)
+        print("HOLDING", self.X)
+        for predicate in state_s0:
+            if predicate.base_name() == "ONTABLE" and predicate.X == self.X:
+                return [operations.PU(self.X)]
+
         else:
             for predicate in state_s0:
-                if predicate.base_name == "ON" and predicate.X==self.X:
-                    return operations.US(self.X, predicate.Y)
+                if predicate.base_name() == "ON" and predicate.X==self.X:
+                    return [operations.US(self.X, predicate.Y)]
 
-class OnTable(Predicate):
+class ONTABLE(Predicate):
     def __init__(self,X):
         self.X = X
 
     def string_representation(self):
-        return "OnTable("+self.X+")"
+        return "ONTABLE("+self.X+")"
 
     def is_equal(self, testing_object):
         return super().is_equal(testing_object)
@@ -95,15 +104,15 @@ class OnTable(Predicate):
         return "ONTABLE"
     
     def perform_action(self, state_s0):
-        return operations.PD(self.X)
+        return [operations.PD(self.X)]
 
-class On(Predicate):
+class ON(Predicate):
     def __init__(self, X, Y):
         self.X = X
         self.Y = Y
     
     def string_representation(self):
-        return "On("+self.X+","+self.Y+")"
+        return "ON("+self.X+","+self.Y+")"
 
     def is_equal(self, testing_object):
         return super().is_equal(testing_object)
@@ -112,4 +121,4 @@ class On(Predicate):
         return "ON"
 
     def perform_action(self, state_s0):
-        return operations.S(self.X, self.Y)
+        return [operations.S(self.X, self.Y)]
