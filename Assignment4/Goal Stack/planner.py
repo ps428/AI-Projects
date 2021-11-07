@@ -110,14 +110,6 @@ def check_for_operation(object):
     
     return False
 
-def arm(state_s0):
-    for predicate in state_s0:
-        if predicate.base_name() == "HOLDING":
-            return predicate
-    
-    return predicates.ARMEMPTY()
-
-
 class GSP:
     def __init__(self, initial_state, goal_state):
         self.initial_state = initial_state
