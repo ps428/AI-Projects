@@ -15,6 +15,7 @@ def print_state(state):
     i=0
     for item in state:
         i+=1
+        # print("-----",i,"---",item)
         base_name = item.base_name()
         if(base_name == "ON"):
             print(colored("ON("+item.X+","+item.Y+")",'magenta'),end="")
@@ -285,11 +286,11 @@ predicates.ARMEMPTY()
 ]
 
 goal_stack = GSP(initial_state=initial_state, goal_state=goal_state)
-steps = goal_stack.get_operations()
+plan_queue = goal_stack.get_operations()
 print(colored("\n\n--------------------------------------------------------------------------------\nInitial State: ","white"))
 print_state(initial_state)
 print(colored("\n\nGoal State: ","white"))
 print_state(goal_state)
 print(colored("\n\nPlan Queue: ","white"))
-print_state(steps)
+print_state(plan_queue)
 print()
