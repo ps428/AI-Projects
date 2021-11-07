@@ -1,6 +1,7 @@
 import planner, predicates
 from termcolor import colored
 
+# to read the raw data and generate a state from the given raw data
 def generate_state(on_predicates, on_table_predicates, clear_predicates, arm_empty, holding):
     state = []
     on_list = on_predicates.split(";")
