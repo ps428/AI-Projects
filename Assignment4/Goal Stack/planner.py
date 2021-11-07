@@ -1,26 +1,28 @@
+from os import stat
 import predicates, operations
+from termcolor import colored
 
 def print_state(state):
     for item in state:
         base_name = item.base_name()
-        if(base_name is "ON"):
-            print(" ON("+item.X+","+item.Y+")",end="")
+        if(base_name == "ON"):
+            print(colored(" ON("+item.X+","+item.Y+")",'grey'),end="")
         
-        if(base_name is "ONTABLE"):
+        if(base_name == "ONTABLE"):
             print(" ONTABLE("+item.X+")",end="")
-        if(base_name is "CLEAR"):
+        if(base_name == "CLEAR"):
             print(" CLEAR("+item.X+")",end="")
-        if(base_name is "HOLDING"):
+        if(base_name == "HOLDING"):
             print(" HOLDING("+item.X+")",end="")
-        if(base_name is "ARMEMPTY"):
+        if(base_name == "ARMEMPTY"):
             print(" ARMEMPTY",end="")
-        if(base_name is "S"):
+        if(base_name == "S"):
             print(" S("+item.X+","+item.Y+")",end="")
-        if(base_name is "US"):
+        if(base_name == "US"):
             print(" US("+item.X+","+item.Y+")",end="")
-        if(base_name is "PU"):
+        if(base_name == "PU"):
             print(" PU("+item.X+")",end="")
-        if(base_name is "PD"):
+        if(base_name == "PD"):
             print(" PD("+item.X+")",end="")
         
 def check_for_predicates(object):
@@ -70,46 +72,83 @@ class GSP:
 
         # while the stack is not empty
         while(len(goal_stack)!=0 and flag is True):
+
             # print(plan_queue)
             # get top element of the stack
             top_element = goal_stack[-1]
-            print("outside",goal_stack)
+            # print_state(goal_stack)
+            # print()
+            # print( goal_stack )
+            # print( "Outside, name: ",top_element.base_name())
+            
+            if type(top_element) is list:
+                
+                # print("ii_________",goal_stack)
+                conjurned_goal = goal_stack.pop()
+                # print("_________",goal_stack)
+                # print("\n_________",conjurned_goal)
+                for goal in conjurned_goal:
+                    if goal not  in state_s0:
+                        goal_stack.append(goal)
+                # print("_________",goal_stack)
+                continue
+            print()
+            print()
+            print("CURRENT STATE: ",end="")
             print_state(state_s0)
-            # print( top_element  )
-            print( "Outside, name: ",top_element.base_name())
+            print()
+
+            print("GOAL STACK:",end="")
+            print_state(goal_stack)
+
             if(check_for_operation(top_element)):
-                operator = goal_stack.pop()
-                plan_queue.append(operator)
-                print("operator: ", operator)
-                for add_conditions in operator.add():
-                    state_s0.append(add_conditions)
+                operator = goal_stack[-1]
+
+                preconditions_met = True
 
                 
+                if preconditions_met:   
+                    goal_stack.pop()     
+                    plan_queue.append(operator)
+                    
+
+                    # print("operator: ", operator)
+                    for delete_conditions in operator.delete():
+                        for predicate in state_s0:
+                            if predicate.is_equal(delete_conditions):
+                                state_s0.remove(predicate)
+                    for add_conditions in operator.add():
+                        state_s0.append(add_conditions)
+
+                    
+            
             elif(check_for_predicates(top_element)):
-                print("predicate: ", top_element)
+                # print("predicate: ", top_element)
 
                 is_true = False
                 for predicate in state_s0:
                     if predicate.is_equal(top_element):
+                        
                         goal_stack.pop()
                         is_true = True
-                        print("--SIMPLE POP--")
+                        # if predicate.base_name() is not "ARMEMPTY":
+                            # print("--SIMPLE POP--",predicate.base_name(), top_element.base_name(),predicate.X,top_element.X)
 
                 if(not is_true):
-                    print("Complex, not found in the state, so something")
+                    # print("Complex, not found in the state, so something")
+                    goal_stack.pop()
+                    
                     new_operations_needed = top_element.perform_action(state_s0)
                     
                     if(new_operations_needed is None):
-                        print(top_element.X)
-                    #     flag = False
-                        exit()
+                        # print(top_element.X)
+                        flag = False
 
-                    goal_stack.pop()
                     goal_stack.append(new_operations_needed[0])
-                    for precondition in new_operations_needed[0].precondition():
-                        goal_stack.append(precondition)
-                        print("____________",precondition.base_name())
 
+                    goal_stack.append(new_operations_needed[0].precondition())
+                    # print(goal_stack)
+                    
         return plan_queue
 
                 # for predicate in

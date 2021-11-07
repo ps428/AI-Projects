@@ -80,7 +80,7 @@ class HOLDING(Predicate):
         return "HOLDING"
     
     def perform_action(self, state_s0):
-        print("HOLDING", self.X)
+        # print("HOLDING", self.X)
         for predicate in state_s0:
             if predicate.base_name() == "ONTABLE" and predicate.X == self.X:
                 return [operations.PU(self.X)]
