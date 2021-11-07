@@ -37,37 +37,40 @@ def generate_state(on_predicates, on_table_predicates, clear_predicates, arm_emp
         state.append(predicates.HOLDING(holding))
     return state
 
+# print("Enter Initial State: ")
+# on_predicates = input("Enter ON predicates seperated by semicolon (E.g. [A,B];[D,C]): ")
+# on_table_predicates = input("Enter ONTABLE predicates seperated by commas(E.g. B,C): ")
+# clear_predicates = input("Enter CLEAR predicates seperated by commas(E.g. A,D): ")
+# arm_empty = input("Is arm empty: y or n")
+# holding = ""
+# if arm_empty=='n':
+#     holding = input("Enter HOLDING element:")
 
-print("Enter Initial State: ")
-on_predicates = input("Enter ON predicates seperated by semicolon (E.g. [A,B];[D,C]): ")
-on_table_predicates = input("Enter ONTABLE predicates seperated by commas(E.g. B,C): ")
-clear_predicates = input("Enter CLEAR predicates seperated by commas(E.g. A,D): ")
-arm_empty = input("Is arm empty: y or n")
-holding = ""
-if arm_empty=='n':
-    holding = input("Enter HOLDING element:")
+# initial_state = generate_state(on_predicates, on_table_predicates, clear_predicates, arm_empty, holding)
+# # planner.print_state(initial_state)
 
-initial_state = generate_state(on_predicates, on_table_predicates, clear_predicates, arm_empty, holding)
-# planner.print_state(initial_state)
+# print("Enter Goal State: ")
+# on_predicates = input("Enter ON predicates seperated by semicolon (E.g. [A,B];[D,C]): ")
+# on_table_predicates = input("Enter ONTABLE predicates seperated by commas(E.g. B,C): ")
+# clear_predicates = input("Enter CLEAR predicates seperated by commas(E.g. A,D): ")
+# arm_empty = input("Is arm empty: y or n")
+# if arm_empty=='n':
+#     holding = input("Enter HOLDING element:")
 
-print("Enter Goal State: ")
-on_predicates = input("Enter ON predicates seperated by semicolon (E.g. [A,B];[D,C]): ")
-on_table_predicates = input("Enter ONTABLE predicates seperated by commas(E.g. B,C): ")
-clear_predicates = input("Enter CLEAR predicates seperated by commas(E.g. A,D): ")
-arm_empty = input("Is arm empty: y or n")
-if arm_empty=='n':
-    holding = input("Enter HOLDING element:")
 
-goal_state = generate_state(on_predicates, on_table_predicates, clear_predicates, arm_empty, holding)
+
+# goal_state = generate_state(on_predicates, on_table_predicates, clear_predicates, arm_empty, holding)
 
 # print()
 # planner.print_state(goal_state)
-goal_stack = planner.GSP(initial_state=initial_state, goal_state=goal_state)
-plan_queue = goal_stack.get_operations()
-print(colored("\n\n--------------------------------------------------------------------------------\nInitial State: ","white"))
-planner.print_state(initial_state)
-print(colored("\n\nGoal State: ","white"))
-planner.print_state(goal_state)
-print(colored("\n\nPlan Queue: ","white"))
-planner.print_state(plan_queue)
-print()
+
+
+# goal_stack = planner.GSP(initial_state=initial_state, goal_state=goal_state)
+# plan_queue = goal_stack.get_operations()
+# print(colored("\n\n--------------------------------------------------------------------------------\nInitial State: ","white"))
+# planner.print_state(initial_state)
+# print(colored("\n\nGoal State: ","white"))
+# planner.print_state(goal_state)
+# print(colored("\n\nPlan Queue: ","white"))
+# planner.print_state(plan_queue)
+# print()

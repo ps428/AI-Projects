@@ -1,0 +1,10 @@
+on_predicates: [a,b];[c,d]
+on_table_predicates: b,d
+clear: a,c
+armempty: y
+holding: NONE
+on_predicates: [b,d];[d,c];[c,a]
+on_table_predicates: a
+clear: b
+armempty: y
+holding: NONE
