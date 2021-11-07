@@ -263,29 +263,3 @@ class GSP:
 
                 # for predicate in
 
-
-
-
-initial_state = [
-predicates.ON('A','B'),
-predicates.ONTABLE('B'),predicates.ONTABLE('C'),predicates.ONTABLE('D'),
-predicates.CLEAR('A'),predicates.CLEAR('C'),predicates.CLEAR('D'),
-predicates.ARMEMPTY()
-]
-
-goal_state = [  
-predicates.ON('B','D'),predicates.ON('D','C'),predicates.ON('C','A'),
-predicates.ONTABLE('A'),
-predicates.CLEAR('B'),
-predicates.ARMEMPTY()
-]
-
-# goal_stack = GSP(initial_state=initial_state, goal_state=goal_state)
-# plan_queue = goal_stack.get_operations()
-# print(colored("\n\n--------------------------------------------------------------------------------\nInitial State: ","white"))
-# print_state(initial_state)
-# print(colored("\n\nGoal State: ","white"))
-# print_state(goal_state)
-# print(colored("\n\nPlan Queue: ","white"))
-# print_state(plan_queue)
-# print()
