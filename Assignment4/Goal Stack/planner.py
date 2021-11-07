@@ -1,21 +1,34 @@
 from os import stat
 import predicates, operations
 from termcolor import colored
+# Text colors:
+
+#       - grey
+#       - red
+#       - green
+#       - yellow
+#       - blue
+#       - magenta
+#       - cyan
+#       - white
+
+
+
 
 def print_state(state):
     for item in state:
         base_name = item.base_name()
         if(base_name == "ON"):
-            print(colored(" ON("+item.X+","+item.Y+")",'white'),end="")
+            print(colored(" ON("+item.X+","+item.Y+"),",'magenta'),end="")
         
         if(base_name == "ONTABLE"):
-            print(colored(" ONTABLE("+item.X+")","yellow"),end="")
+            print(colored(" ONTABLE("+item.X+"),","yellow"),end="")
         if(base_name == "CLEAR"):
-            print(colored(" CLEAR("+item.X+")",'cyan'),end="")
+            print(colored(" CLEAR("+item.X+"),",'cyan'),end="")
         if(base_name == "HOLDING"):
-            print(colored(" HOLDING("+item.X+")",'red'),end="")
+            print(colored(" HOLDING("+item.X+"),",'red'),end="")
         if(base_name == "ARMEMPTY"):
-            print(colored(" ARMEMPTY",'blue'),end="")
+            print(colored(" ARMEMPTY,",'blue'),end="")
         if(base_name == "S"):
             print(" S("+item.X+","+item.Y+")",end="")
         if(base_name == "US"):
@@ -24,7 +37,7 @@ def print_state(state):
             print(" PU("+item.X+")",end="")
         if(base_name == "PD"):
             print(" PD("+item.X+")",end="")
-        
+
 def check_for_predicates(object):
     my_predicates = ["ON","ONTABLE","CLEAR","ARMEMPTY","HOLDING"]
     for predicate in my_predicates:
@@ -92,16 +105,22 @@ class GSP:
                         goal_stack.append(goal)
                 # print("_________",goal_stack)
                 continue
+
+            
             print()
             print()
-            print("CURRENT STATE: ",end="")
+            print(colored("CURRENT STATE: ","white"),end="")
             print_state(state_s0)
             print()
 
-            print("GOAL STACK:",end="")
+            print(colored("GOAL STATE: ","white"),end="")
             print_state(goal_stack)
 
             if(check_for_operation(top_element)):
+                print(colored("\nOperator: ","white"),end="")
+                print_state([top_element])
+                print()
+                
                 operator = goal_stack[-1]
 
                 preconditions_met = True
@@ -124,7 +143,10 @@ class GSP:
             
             elif(check_for_predicates(top_element)):
                 # print("predicate: ", top_element)
-
+                print(colored("\nPredicate: ","white"),end="")
+                print_state([top_element])
+                print()
+                            
                 is_true = False
                 for predicate in state_s0:
                     if predicate.is_equal(top_element):
@@ -172,9 +194,10 @@ predicates.ARMEMPTY()
 
 goal_stack = GSP(initial_state=initial_state, goal_state=goal_state)
 steps = goal_stack.get_operations()
-print("\n--------------------------------\nInitial State: ")
+print(colored("\n\n--------------------\nInitial State: ","white"))
 print_state(initial_state)
-print("\nGoal State: ")
+print(colored("\n\nGoal State: ","white"))
 print_state(goal_state)
-print("\nPlan Queue: ")
+print(colored("\n\nPlan Queue: ","white"))
 print_state(steps)
+print()
