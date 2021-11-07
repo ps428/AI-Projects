@@ -1,4 +1,3 @@
-from os import stat
 import predicates, operations
 from termcolor import colored
 # Text colors:
@@ -12,23 +11,74 @@ from termcolor import colored
 #       - cyan
 #       - white
 
-
-
-
 def print_state(state):
+    i=0
+    for item in state:
+        i+=1
+        base_name = item.base_name()
+        if(base_name == "ON"):
+            print(colored("ON("+item.X+","+item.Y+")",'magenta'),end="")
+        
+        if(base_name == "ONTABLE"):
+            print(colored("ONTABLE("+item.X+")","yellow"),end="")
+        if(base_name == "CLEAR"):
+            print(colored("CLEAR("+item.X+")",'cyan'),end="")
+        if(base_name == "HOLDING"):
+            print(colored("HOLDING("+item.X+")",'red'),end="")
+        if(base_name == "ARMEMPTY"):
+            print(colored("ARMEMPTY",'blue'),end="")
+        if(base_name == "S"):
+            print("S("+item.X+","+item.Y+")",end="")
+        if(base_name == "US"):
+            print("US("+item.X+","+item.Y+")",end="")
+        if(base_name == "PU"):
+            print("PU("+item.X+")",end="")
+        if(base_name == "PD"):
+            print("PD("+item.X+")",end="")
+        
+        if(i<len(state)):
+            print(", ",end="")
+
+def print_stack(state):
+    state = state.copy()
+    state.reverse()
     for item in state:
         base_name = item.base_name()
         if(base_name == "ON"):
-            print(colored(" ON("+item.X+","+item.Y+"),",'magenta'),end="")
+            print(colored(" ON("+item.X+","+item.Y+")",'magenta'))
+        if(base_name == "ONTABLE"):
+            print(colored(" ONTABLE("+item.X+")","yellow"))
+        if(base_name == "CLEAR"):
+            print(colored(" CLEAR("+item.X+")",'cyan'))
+        if(base_name == "HOLDING"):
+            print(colored(" HOLDING("+item.X+")",'red'))
+        if(base_name == "ARMEMPTY"):
+            print(colored(" ARMEMPTY",'blue'))
+        if(base_name == "S"):
+            print(" S("+item.X+","+item.Y+")")
+        if(base_name == "US"):
+            print(" US("+item.X+","+item.Y+")")
+        if(base_name == "PU"):
+            print(" PU("+item.X+")")
+        if(base_name == "PD"):
+            print(" PD("+item.X+")")
+
+def print_conjoined_sub_goals(state):
+    i=0
+    for item in state:
+        i+=1
+        base_name = item.base_name()
+        if(base_name == "ON"):
+            print(colored(" ON("+item.X+","+item.Y+")",'magenta'),end="")
         
         if(base_name == "ONTABLE"):
-            print(colored(" ONTABLE("+item.X+"),","yellow"),end="")
+            print(colored(" ONTABLE("+item.X+")","yellow"),end="")
         if(base_name == "CLEAR"):
-            print(colored(" CLEAR("+item.X+"),",'cyan'),end="")
+            print(colored(" CLEAR("+item.X+")",'cyan'),end="")
         if(base_name == "HOLDING"):
-            print(colored(" HOLDING("+item.X+"),",'red'),end="")
+            print(colored(" HOLDING("+item.X+")",'red'),end="")
         if(base_name == "ARMEMPTY"):
-            print(colored(" ARMEMPTY,",'blue'),end="")
+            print(colored(" ARMEMPTY",'blue'),end="")
         if(base_name == "S"):
             print(" S("+item.X+","+item.Y+")",end="")
         if(base_name == "US"):
@@ -38,6 +88,11 @@ def print_state(state):
         if(base_name == "PD"):
             print(" PD("+item.X+")",end="")
 
+        if(i<len(state)):
+            print(" AND",end="")
+
+    print( " <-- Conjoined Sub Goals")
+    
 def check_for_predicates(object):
     my_predicates = ["ON","ONTABLE","CLEAR","ARMEMPTY","HOLDING"]
     for predicate in my_predicates:
@@ -93,6 +148,12 @@ class GSP:
             # print()
             # print( goal_stack )
             # print( "Outside, name: ",top_element.base_name())
+            print()
+            print()
+            print(colored("-----\nCURRENT STATE: ","white"),end="")
+            print_state(state_s0)
+            print()
+            print()
             
             if type(top_element) is list:
                 
@@ -100,26 +161,55 @@ class GSP:
                 conjurned_goal = goal_stack.pop()
                 # print("_________",goal_stack)
                 # print("\n_________",conjurned_goal)
+                print(colored("GOAL STACK: ","white"))
+
+                goal_state_before_addition = goal_stack.copy()
+                print_stack(conjurned_goal)
+                if(len(conjurned_goal)>1):
+                    print_conjoined_sub_goals(conjurned_goal)
                 for goal in conjurned_goal:
                     if goal not  in state_s0:
                         goal_stack.append(goal)
                 # print("_________",goal_stack)
+                print_stack(goal_state_before_addition)
+                print()
+
                 continue
+                
+            else:
+                print(colored("GOAL STACK: ","white"))
+                print_stack(goal_stack)
 
             
             print()
             print()
-            print(colored("CURRENT STATE: ","white"),end="")
-            print_state(state_s0)
+            if (len(plan_queue))>1:
+                print("PLAN QUEUE: ",end="")
+                print_state(plan_queue[:len(plan_queue)-1])
+            else:
+                print("PLAN QUEUE: -",end="")
+
             print()
-
-            print(colored("GOAL STATE: ","white"),end="")
-            print_state(goal_stack)
-
+            print()
+            
             if(check_for_operation(top_element)):
                 print(colored("\nOperator: ","white"),end="")
                 print_state([top_element])
                 print()
+                print(colored("Preconditions are: ",'white'),end="")
+                print_state(top_element.precondition())
+                print()
+                print(colored("Add list is (Conditions that will become true): ",'white'),end="")
+                print_state(top_element.add())
+                print()
+                print(colored("Delete list is (Conditions that will become false): ",'white'),end="")
+                print_state(top_element.delete())
+                print()
+                print()
+                print(colored("Changed Goal Stack",'white'))
+                # print_stack(top_element.precondition())
+                print_conjoined_sub_goals(top_element.precondition())
+                print_stack(goal_stack)
                 
                 operator = goal_stack[-1]
 
@@ -143,14 +233,14 @@ class GSP:
             
             elif(check_for_predicates(top_element)):
                 # print("predicate: ", top_element)
-                print(colored("\nPredicate: ","white"),end="")
+                print(colored("\n\nPredicate: ","white"),end="")
                 print_state([top_element])
                 print()
                             
                 is_true = False
                 for predicate in state_s0:
                     if predicate.is_equal(top_element):
-                        
+                        print(colored("This is true in the current state. So we simply pop it from the goal stack.",'white'))
                         goal_stack.pop()
                         is_true = True
                         # if predicate.base_name() is not "ARMEMPTY":
@@ -161,7 +251,9 @@ class GSP:
                     goal_stack.pop()
                     
                     new_operations_needed = top_element.perform_action(state_s0)
-                    
+                    print(colored("This is false in the current state. So we will pop it and we need to make it true by:",'white'))
+                    print_state(new_operations_needed)
+                    print(colored("\nSo we will push this new operator in the stack along with its preconditions.",'white'))
                     if(new_operations_needed is None):
                         # print(top_element.X)
                         flag = False
@@ -194,7 +286,7 @@ predicates.ARMEMPTY()
 
 goal_stack = GSP(initial_state=initial_state, goal_state=goal_state)
 steps = goal_stack.get_operations()
-print(colored("\n\n--------------------\nInitial State: ","white"))
+print(colored("\n\n--------------------------------------------------------------------------------\nInitial State: ","white"))
 print_state(initial_state)
 print(colored("\n\nGoal State: ","white"))
 print_state(goal_state)
