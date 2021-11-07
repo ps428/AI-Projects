@@ -256,6 +256,9 @@ class GSP:
                     goal_stack.append(new_operations_needed[0].precondition())
                     # print(goal_stack)
                     
+        if flag==False:
+            print("\n--------------------------------------\nNO SOLUTIONS FOUND")
+            return None
         return plan_queue
 
                 # for predicate in

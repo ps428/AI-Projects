@@ -7,31 +7,31 @@ def generate_state(on_predicates, on_table_predicates, clear_predicates, arm_emp
     on_table_list = on_table_predicates.split(",")
     clear_list = clear_predicates.split(",")
 
-    print(on_list)
-    print(on_table_list)
-    print(clear_list)
+    # print(on_list)
+    # print(on_table_list)
+    # print(clear_list)
     for on_elements in on_list:
         element_X = on_elements[1]
         element_y = on_elements[3]
         on = predicates.ON(element_X, element_y)
-        print(on)
+        # print(on)
         state.append(on)
 
     for on_table in on_table_list:
         element_X = on_table
         on_t = predicates.ONTABLE(element_X)
-        print(on_t)
+        # print(on_t)
         state.append( on_t)
 
     for cleared in clear_list:
         element_X = cleared
         clear = predicates.CLEAR(element_X)
-        print(clear)
+        # print(clear)
         state.append(clear)
     
     if arm_empty=='y':
         empty = predicates.ARMEMPTY()
-        print(empty)
+        # print(empty)
         state.append(empty)
     elif arm_empty == 'n':
         state.append(predicates.HOLDING(holding))

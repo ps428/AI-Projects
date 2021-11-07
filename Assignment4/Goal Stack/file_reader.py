@@ -3,7 +3,7 @@ import planner
 
 import main
 
-inputs = open('input_file.txt')
+inputs = open('input_file4.txt')
 lines = inputs.readlines()
 a = []
 for line in lines:

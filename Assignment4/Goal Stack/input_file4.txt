@@ -1,0 +1,13 @@
+Input States:
+on_predicates: [b,a];[c,d]
+on_table_predicates: a,d
+clear: b,c
+armempty: y
+holding: NONE
+::::::::::::::::::::::::::
+Output_states:
+on_predicates: [a,c];[b,d]
+on_table_predicates: c,d
+clear: a,b
+armempty: y
+holding: NONE
