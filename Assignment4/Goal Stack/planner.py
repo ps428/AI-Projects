@@ -273,15 +273,18 @@ class GSP:
                     
                     # get the operations needed for making the predicate true
                     new_operations_needed = top_element.perform_action(state_s0)
+                   
                     print(colored("This is false in the current state. So we will pop it and we need to make it true by:",'white'))
 
                     # print the needed operator
-                    print_state(new_operations_needed)
-                    print(colored("\nSo we will push this new operator in the stack along with its preconditions.",'white'))
                     if(new_operations_needed is None):
                         # print(top_element.X)
                         flag = False
-
+                        print("ERROR")
+                        exit()
+                    print_state(new_operations_needed)
+                    print(colored("\nSo we will push this new operator in the stack along with its preconditions.",'white'))
+                  
                     # push the newly found operators needed to make the predicate true
                     goal_stack.append(new_operations_needed[0])
 
