@@ -6,16 +6,16 @@ def print_state(state):
     for item in state:
         base_name = item.base_name()
         if(base_name == "ON"):
-            print(colored(" ON("+item.X+","+item.Y+")",'grey'),end="")
+            print(colored(" ON("+item.X+","+item.Y+")",'white'),end="")
         
         if(base_name == "ONTABLE"):
-            print(" ONTABLE("+item.X+")",end="")
+            print(colored(" ONTABLE("+item.X+")","yellow"),end="")
         if(base_name == "CLEAR"):
-            print(" CLEAR("+item.X+")",end="")
+            print(colored(" CLEAR("+item.X+")",'cyan'),end="")
         if(base_name == "HOLDING"):
-            print(" HOLDING("+item.X+")",end="")
+            print(colored(" HOLDING("+item.X+")",'red'),end="")
         if(base_name == "ARMEMPTY"):
-            print(" ARMEMPTY",end="")
+            print(colored(" ARMEMPTY",'blue'),end="")
         if(base_name == "S"):
             print(" S("+item.X+","+item.Y+")",end="")
         if(base_name == "US"):
@@ -172,4 +172,9 @@ predicates.ARMEMPTY()
 
 goal_stack = GSP(initial_state=initial_state, goal_state=goal_state)
 steps = goal_stack.get_operations()
+print("\n--------------------------------\nInitial State: ")
+print_state(initial_state)
+print("\nGoal State: ")
+print_state(goal_state)
+print("\nPlan Queue: ")
 print_state(steps)
