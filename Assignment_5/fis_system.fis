@@ -12,6 +12,14 @@ AggMethod='max'
 DefuzzMethod='centroid'
 
 [Input1]
+Name='daily_customer'
+Range=[0 10]
+NumMFs=3
+MF1='low_footfall':'trapmf',[-4.5 -0.5 0.5 4.5]
+MF2='moderate_footfall':'trapmf',[0.5 4.5 5.5 9.5]
+MF3='excess_footfall':'trapmf',[5.5 9.5 10.5 14.5]
+
+[Input2]
 Name='electronics_items'
 Range=[0 10]
 NumMFs=3
@@ -19,13 +27,6 @@ MF1='less_items':'gauss2mf',[1.699 -0.5 1.699 0.5]
 MF2='moderate_items':'gauss2mf',[1.699 4.5 1.699 5.5]
 MF3='more_items':'gauss2mf',[1.699 9.5 1.699 10.5]
 
-[Input2]
-Name='daily_customer'
-Range=[0 10]
-NumMFs=3
-MF1='low_footfall':'trapmf',[-4.5 -0.5 0.5 4.5]
-MF2='moderate_footfall':'trapmf',[0.5 4.5 5.5 9.5]
-MF3='excess_footfall':'trapmf',[5.5 9.5 10.5 14.5]
 
 [Input3]
 Name='competitors_in_the-vicinity'
