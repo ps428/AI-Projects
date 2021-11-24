@@ -1,0 +1,58 @@
+[System]
+Name='assignment5_test'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=12
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='electronics_items'
+Range=[0 10]
+NumMFs=3
+MF1='less_items':'trimf',[0 1.3 3.2]
+MF2='moderate_items':'trimf',[2.15 5.2 7.25]
+MF3='extensive_items':'trimf',[5.8 10 10]
+
+[Input2]
+Name='groceries_items'
+Range=[0 100]
+NumMFs=3
+MF1='less_items':'trimf',[0 19 39]
+MF2='moderate_items':'trimf',[29 58 71]
+MF3='extensive_items':'trimf',[69 100 100]
+
+[Input3]
+Name='competitors_in_the-vicinity'
+Range=[0 10]
+NumMFs=3
+MF1='less_competition':'trimf',[0 3.23 4.34]
+MF2='moderate_competition':'trimf',[3.5 5.9 7.25]
+MF3='extensive_competition':'trimf',[6.9 10 10]
+
+[Output1]
+Name='sales_rating'
+Range=[0 1]
+NumMFs=3
+MF1='less_sales':'trimf',[0 0.2 0.33]
+MF2='moderate_sales':'trimf',[0.23 0.62 0.81]
+MF3='extensive_sales':'trimf',[0.69 1 1.41666666666667]
+
+[Rules]
+1 1 3, 1 (1) : 1
+1 1 2, 1 (1) : 1
+1 2 1, 2 (1) : 1
+2 2 1, 2 (1) : 1
+2 2 2, 2 (1) : 1
+3 3 1, 3 (1) : 1
+3 2 1, 3 (1) : 1
+2 3 1, 3 (1) : 1
+2 3 2, 2 (1) : 1
+2 1 2, 2 (1) : 1
+1 1 2, 1 (1) : 1
+1 1 3, 2 (1) : 1
