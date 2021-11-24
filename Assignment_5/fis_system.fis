@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=3
 NumOutputs=1
-NumRules=18
+NumRules=20
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -26,7 +26,6 @@ NumMFs=3
 MF1='less_items':'gauss2mf',[1.699 -0.5 1.699 0.5]
 MF2='moderate_items':'gauss2mf',[1.699 4.5 1.699 5.5]
 MF3='more_items':'gauss2mf',[1.699 9.5 1.699 10.5]
-
 
 [Input3]
 Name='competitors_in_the-vicinity'
@@ -65,3 +64,5 @@ MF5='very_high':'gauss2mf',[0.08493 0.975 0.08493 1.025]
 1 2 2, 2 (1) : 1
 2 1 2, 2 (1) : 1
 1 1 1, 2 (1) : 1
+2 2 1, 4 (1) : 1
+2 2 3, 2 (1) : 1
