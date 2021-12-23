@@ -10,5 +10,9 @@ reg = linear_model.LinearRegression()
 reg.fit(df[['Daily customers','Electronics items','Groceries Items','Competition']],df.Sales)
 
 # Printing the m values and b
-print(reg.coef_)
-print(reg.intercept_)
+print("m values:",reg.coef_)
+print("b:",reg.intercept_)
+
+test_input = [[5,5,50,9.5]]
+result = reg.predict(test_input)
+print(result)

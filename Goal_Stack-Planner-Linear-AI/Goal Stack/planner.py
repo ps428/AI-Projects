@@ -282,6 +282,7 @@ class GSP:
                         flag = False
                         print("ERROR")
                         exit()
+                        
                     print_state(new_operations_needed)
                     print(colored("\nSo we will push this new operator in the stack along with its preconditions.",'white'))
                   

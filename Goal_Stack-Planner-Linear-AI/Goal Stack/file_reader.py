@@ -4,7 +4,7 @@ import planner
 import main
 
 # change the file name here for different files
-inputs = open('input_file.txt')
+inputs = open('input_file2.txt')
 lines = inputs.readlines()
 a = []
 

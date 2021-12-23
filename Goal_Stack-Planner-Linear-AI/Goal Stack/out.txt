@@ -1,0 +1,642 @@
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[34m ARMEMPTY[0m
+[36m CLEAR(b)[0m
+[36m CLEAR(c)[0m
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[34mARMEMPTY[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(b)[0m
+[36m CLEAR(c)[0m
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[36mCLEAR(b)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(c)[0m
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[36mCLEAR(c)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+US(d,c)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(d)[0m
+[35m ON(d,c)[0m
+[34m ARMEMPTY[0m
+[34m ARMEMPTY[0m AND[35m ON(d,c)[0m AND[36m CLEAR(d)[0m <-- Conjoined Sub Goals
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(d)[0m
+[35m ON(d,c)[0m
+[34m ARMEMPTY[0m
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[36mCLEAR(d)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[35m ON(d,c)[0m
+[34m ARMEMPTY[0m
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[35mON(d,c)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+[34m ARMEMPTY[0m
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[34mARMEMPTY[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m
+
+[37mGOAL STACK: [0m
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+Operator: [0mUS(d,c)
+[37mPreconditions are: [0m[34mARMEMPTY[0m, [35mON(d,c)[0m, [36mCLEAR(d)[0m
+[37mAdd list is (Conditions that will become true): [0m[36mCLEAR(c)[0m, [31mHOLDING(d)[0m
+[37mDelete list is (Conditions that will become false): [0m[34mARMEMPTY[0m, [35mON(d,c)[0m
+
+[37mChanged Goal Stack[0m
+[34m ARMEMPTY[0m AND[35m ON(d,c)[0m AND[36m CLEAR(d)[0m <-- Conjoined Sub Goals
+ US(d,c)
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [31mHOLDING(d)[0m
+
+[37mGOAL STACK: [0m
+[33m ONTABLE(d)[0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[33mONTABLE(d)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+PD(d)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [31mHOLDING(d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(d)[0m
+ PD(d)
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [31mHOLDING(d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(d)[0m
+ PD(d)
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+
+Predicate: [0m[31mHOLDING(d)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [31mHOLDING(d)[0m
+
+[37mGOAL STACK: [0m
+ PD(d)
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: -
+
+[37m
+Operator: [0mPD(d)
+[37mPreconditions are: [0m[31mHOLDING(d)[0m
+[37mAdd list is (Conditions that will become true): [0m[34mARMEMPTY[0m, [33mONTABLE(d)[0m
+[37mDelete list is (Conditions that will become false): [0m[31mHOLDING(d)[0m
+
+[37mChanged Goal Stack[0m
+[31m HOLDING(d)[0m <-- Conjoined Sub Goals
+ PD(d)
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[33m ONTABLE(a)[0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[33mONTABLE(a)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[35m ON(b,d)[0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[35mON(b,d)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+S(b,d)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(b)[0m
+[36m CLEAR(d)[0m
+[36m CLEAR(d)[0m AND[31m HOLDING(b)[0m <-- Conjoined Sub Goals
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(b)[0m
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[31mHOLDING(b)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+US(b,a)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(b)[0m
+[35m ON(b,a)[0m
+[34m ARMEMPTY[0m
+[34m ARMEMPTY[0m AND[35m ON(b,a)[0m AND[36m CLEAR(b)[0m <-- Conjoined Sub Goals
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(b)[0m
+[35m ON(b,a)[0m
+[34m ARMEMPTY[0m
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[36mCLEAR(b)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[35m ON(b,a)[0m
+[34m ARMEMPTY[0m
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[35mON(b,a)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+[34m ARMEMPTY[0m
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+
+Predicate: [0m[34mARMEMPTY[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[35mON(b,a)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [34mARMEMPTY[0m, [33mONTABLE(d)[0m
+
+[37mGOAL STACK: [0m
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c)
+
+[37m
+Operator: [0mUS(b,a)
+[37mPreconditions are: [0m[34mARMEMPTY[0m, [35mON(b,a)[0m, [36mCLEAR(b)[0m
+[37mAdd list is (Conditions that will become true): [0m[36mCLEAR(a)[0m, [31mHOLDING(b)[0m
+[37mDelete list is (Conditions that will become false): [0m[34mARMEMPTY[0m, [35mON(b,a)[0m
+
+[37mChanged Goal Stack[0m
+[34m ARMEMPTY[0m AND[35m ON(b,a)[0m AND[36m CLEAR(b)[0m <-- Conjoined Sub Goals
+ US(b,a)
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [31mHOLDING(b)[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(d)[0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c), PD(d)
+
+[37m
+
+Predicate: [0m[36mCLEAR(d)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [31mHOLDING(b)[0m
+
+[37mGOAL STACK: [0m
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c), PD(d)
+
+[37m
+Operator: [0mS(b,d)
+[37mPreconditions are: [0m[36mCLEAR(d)[0m, [31mHOLDING(b)[0m
+[37mAdd list is (Conditions that will become true): [0m[34mARMEMPTY[0m, [35mON(b,d)[0m
+[37mDelete list is (Conditions that will become false): [0m[36mCLEAR(d)[0m, [31mHOLDING(b)[0m
+
+[37mChanged Goal Stack[0m
+[36m CLEAR(d)[0m AND[31m HOLDING(b)[0m <-- Conjoined Sub Goals
+ S(b,d)
+[35m ON(c,a)[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[35m ON(c,a)[0m
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+
+Predicate: [0m[35mON(c,a)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+S(c,a)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(c)[0m
+[36m CLEAR(a)[0m
+[36m CLEAR(a)[0m AND[31m HOLDING(c)[0m <-- Conjoined Sub Goals
+ S(c,a)
+
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[31m HOLDING(c)[0m
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+
+Predicate: [0m[31mHOLDING(c)[0m
+[37mThis is false in the current state. So we will pop it and we need to make it true by:[0m
+PU(c)[37m
+So we will push this new operator in the stack along with its preconditions.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[34m ARMEMPTY[0m
+[33m ONTABLE(c)[0m
+[36m CLEAR(c)[0m
+[36m CLEAR(c)[0m AND[33m ONTABLE(c)[0m AND[34m ARMEMPTY[0m <-- Conjoined Sub Goals
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[34m ARMEMPTY[0m
+[33m ONTABLE(c)[0m
+[36m CLEAR(c)[0m
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+
+Predicate: [0m[34mARMEMPTY[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[33m ONTABLE(c)[0m
+[36m CLEAR(c)[0m
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+
+Predicate: [0m[33mONTABLE(c)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(c)[0m
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+
+Predicate: [0m[36mCLEAR(c)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [34mARMEMPTY[0m, [35mON(b,d)[0m
+
+[37mGOAL STACK: [0m
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a)
+
+[37m
+Operator: [0mPU(c)
+[37mPreconditions are: [0m[36mCLEAR(c)[0m, [33mONTABLE(c)[0m, [34mARMEMPTY[0m
+[37mAdd list is (Conditions that will become true): [0m[31mHOLDING(c)[0m
+[37mDelete list is (Conditions that will become false): [0m[34mARMEMPTY[0m, [33mONTABLE(c)[0m
+
+[37mChanged Goal Stack[0m
+[36m CLEAR(c)[0m AND[33m ONTABLE(c)[0m AND[34m ARMEMPTY[0m <-- Conjoined Sub Goals
+ PU(c)
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [35mON(b,d)[0m, [31mHOLDING(c)[0m
+
+[37mGOAL STACK: [0m
+[36m CLEAR(a)[0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a), S(b,d)
+
+[37m
+
+Predicate: [0m[36mCLEAR(a)[0m
+[37mThis is true in the current state. So we simply pop it from the goal stack.[0m
+
+
+[37m-----
+CURRENT STATE: [0m[33mONTABLE(a)[0m, [36mCLEAR(b)[0m, [36mCLEAR(c)[0m, [33mONTABLE(d)[0m, [36mCLEAR(a)[0m, [35mON(b,d)[0m, [31mHOLDING(c)[0m
+
+[37mGOAL STACK: [0m
+ S(c,a)
+
+
+PLAN QUEUE: US(d,c), PD(d), US(b,a), S(b,d)
+
+[37m
+Operator: [0mS(c,a)
+[37mPreconditions are: [0m[36mCLEAR(a)[0m, [31mHOLDING(c)[0m
+[37mAdd list is (Conditions that will become true): [0m[34mARMEMPTY[0m, [35mON(c,a)[0m
+[37mDelete list is (Conditions that will become false): [0m[36mCLEAR(a)[0m, [31mHOLDING(c)[0m
+
+[37mChanged Goal Stack[0m
+[36m CLEAR(a)[0m AND[31m HOLDING(c)[0m <-- Conjoined Sub Goals
+ S(c,a)
+[37m
+
+--------------------------------------------------------------------------------
+Initial State: [0m
+[35mON(b,a)[0m, [35mON(d,c)[0m, [33mONTABLE(a)[0m, [33mONTABLE(c)[0m, [36mCLEAR(b)[0m, [36mCLEAR(d)[0m, [34mARMEMPTY[0m[37m
+
+Goal State: [0m
+[35mON(c,a)[0m, [35mON(b,d)[0m, [33mONTABLE(a)[0m, [33mONTABLE(d)[0m, [36mCLEAR(c)[0m, [36mCLEAR(b)[0m, [34mARMEMPTY[0m[37m
+
+Plan Queue: [0m
+US(d,c), PD(d), US(b,a), S(b,d), PU(c), S(c,a)
